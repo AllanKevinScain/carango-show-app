@@ -18,7 +18,7 @@ export const CustomRoutes = () => {
 
       <Route element={<LayoutProduct />}>
         <Route index path="/" element={<HomePage />} />
-        <Route path=":product" element={<ProductPage />} />
+        <Route path="product/:productId" element={<ProductPage />} />
         <Route path="list" element={<ListPage />} />
       </Route>
     </Routes>
