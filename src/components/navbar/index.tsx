@@ -2,12 +2,28 @@ import { twMerge } from "tailwind-merge";
 import { Logo } from "./logo";
 import { LoginButton } from "./login";
 import { Container } from "../container";
+import { BiMenu } from "react-icons/bi";
+import { Button } from "../button";
 
-export const Navbar = () => {
+interface NavbarInterface {
+  handleDrawer: () => void;
+}
+
+export const Navbar = (props: NavbarInterface) => {
+  const { handleDrawer } = props;
   return (
     <nav className="bg-blue-950 p-[14px]">
       <Container className={twMerge("flex justify-between items-center")}>
-        <Logo />
+        <div className="flex items-center gap-[14px]">
+          <Button
+            variant="ghost"
+            className="text-blue-400 w-fit"
+            onClick={handleDrawer}
+          >
+            <BiMenu size={40} />
+          </Button>
+          <Logo />
+        </div>
 
         <LoginButton />
       </Container>

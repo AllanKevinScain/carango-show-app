@@ -5,7 +5,11 @@ export const Logo = () => {
   return (
     <Link
       to="/list"
-      className={twMerge("flex gap-[10px] items-center", "cursor-pointer")}
+      className={twMerge(
+        "md:flex md:gap-[10px] md:items-center",
+        "cursor-pointer",
+        "hidden"
+      )}
     >
       <img src="/carro_medio.png" className="h-[55px]" />
       <h3 className="text-blue-400 font-extrabold text-[24px]">

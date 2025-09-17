@@ -28,6 +28,7 @@ export const Button = (props: ButtonProps) => {
         "focus:outline-none focus:ring-2 focus:ring-offset-2",
         "rounded-lg font-medium w-full",
         "transition-colors",
+        "cursor-pointer",
         variant === "solid" && "bg-blue-600 text-white hover:bg-blue-700",
         variant === "outline" &&
           "border-2 border-blue-600 bg-transparent text-blue-600 hover:bg-blue-50",
