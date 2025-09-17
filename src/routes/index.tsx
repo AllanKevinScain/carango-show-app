@@ -1,27 +1,30 @@
 import { Routes, Route } from "react-router";
 import {
-  HomePage,
   ListPage,
   LoginPage,
   ProductPage,
   RegisterPage,
+  AdminPage,
 } from "./pages";
-import { LayoutLogin, LayoutProduct } from "./layouts";
+import { LayoutDefault, LayoutLogin } from "./layouts";
 import { CartPage } from "./pages/cart";
 
 export const CustomRoutes = () => {
   return (
     <Routes>
       <Route element={<LayoutLogin />}>
-        <Route path="login" element={<LoginPage />} />
+        <Route index path="/" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />
       </Route>
 
-      <Route element={<LayoutProduct />}>
-        <Route index path="/" element={<HomePage />} />
+      <Route element={<LayoutDefault />}>
+        <Route index path="product" element={<ListPage />} />
         <Route path="product/:productId" element={<ProductPage />} />
-        <Route path="list" element={<ListPage />} />
         <Route path="cart" element={<CartPage />} />
+      </Route>
+
+      <Route element={<LayoutDefault />}>
+        <Route index path="admin" element={<AdminPage />} />
       </Route>
     </Routes>
   );

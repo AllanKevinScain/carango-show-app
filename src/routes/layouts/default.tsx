@@ -2,7 +2,7 @@ import { Drawer, Navbar } from "@/components";
 import { useState } from "react";
 import { Outlet } from "react-router";
 
-export const LayoutProduct = () => {
+export const LayoutDefault = () => {
   const [open, setOpen] = useState(false);
 
   function handleDrawer() {

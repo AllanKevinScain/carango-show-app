@@ -51,7 +51,7 @@ export const Drawer = (props: DrawerInterface) => {
           <nav className="p-4 space-y-2">
             {isAdmin && (
               <Link
-                to="#"
+                to="admin"
                 className={twMerge(
                   "flex items-center gap-[14px]",
                   "px-3 py-2 rounded",

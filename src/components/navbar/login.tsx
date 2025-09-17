@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { BiLogInCircle } from "react-icons/bi";
+import { Link } from "react-router";
 import { twMerge } from "tailwind-merge";
 
 export const LoginButton = () => {
   const [activeAnimation, setAnimation] = useState(false);
 
   return (
-    <button
-      type="button"
+    <Link
+      to="login"
       onMouseEnter={() => setAnimation(true)}
       onMouseLeave={() => setAnimation(false)}
       className={twMerge(
@@ -24,6 +25,6 @@ export const LoginButton = () => {
         </span>
       </div>
       <BiLogInCircle size={40} />
-    </button>
+    </Link>
   );
 };
