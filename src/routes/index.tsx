@@ -7,6 +7,7 @@ import {
   RegisterPage,
 } from "./pages";
 import { LayoutLogin, LayoutProduct } from "./layouts";
+import { CartPage } from "./pages/cart";
 
 export const CustomRoutes = () => {
   return (
@@ -20,6 +21,7 @@ export const CustomRoutes = () => {
         <Route index path="/" element={<HomePage />} />
         <Route path="product/:productId" element={<ProductPage />} />
         <Route path="list" element={<ListPage />} />
+        <Route path="cart" element={<CartPage />} />
       </Route>
     </Routes>
   );
