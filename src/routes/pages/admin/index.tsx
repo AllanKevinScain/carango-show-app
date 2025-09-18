@@ -1,6 +1,6 @@
 import { Button, Container, TextField } from "@/components";
 import { twMerge } from "tailwind-merge";
-import { CreateModal, EditModal } from "./components";
+import { CreateModal, EditModal, List } from "./components";
 import { useToggle } from "@/hooks";
 
 export function AdminPage() {
@@ -33,15 +33,15 @@ export function AdminPage() {
           <Button className="w-fit h-fit px-3 py-2">Pesquisar</Button>
         </div>
 
-        <div className="w-full h-[50px] bg-green-400">
-          {/* <TextField id="thumb" />
+        <List />
+
+        {/* <TextField id="thumb" />
           <TextField id="name" placeholder="Nome" />
           <TextField id="trade" placeholder="Marca" />
           <TextField id="model" placeholder="Modelo" />
           <TextField id="year" placeholder="Ano" />
           <TextField id="price" placeholder="Valor" />
           <TextField id="specifications" placeholder="Specificações" /> */}
-        </div>
       </Container>
     </>
   );
