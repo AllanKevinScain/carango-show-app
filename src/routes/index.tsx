@@ -5,6 +5,7 @@ import {
   ProductPage,
   RegisterPage,
   AdminPage,
+  ProfilePage,
 } from "./pages";
 import { LayoutDefault, LayoutLogin } from "./layouts";
 import { CartPage } from "./pages/cart";
@@ -25,6 +26,7 @@ export const CustomRoutes = () => {
 
       <Route element={<LayoutDefault />}>
         <Route index path="admin" element={<AdminPage />} />
+        <Route path="profile" element={<ProfilePage />} />
       </Route>
     </Routes>
   );

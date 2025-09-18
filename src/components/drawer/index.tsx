@@ -64,7 +64,7 @@ export const Drawer = (props: DrawerInterface) => {
             )}
 
             <Link
-              to="#"
+              to="profile"
               className={twMerge(
                 "flex items-center gap-[14px]",
                 "px-3 py-2 rounded",
