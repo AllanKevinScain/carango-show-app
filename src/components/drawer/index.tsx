@@ -4,26 +4,26 @@ import { twMerge } from "tailwind-merge";
 import colors from "tailwindcss/colors";
 import { Button } from "../button";
 import { ImProfile } from "react-icons/im";
-import { Link } from "react-router";
 import { GrUserAdmin } from "react-icons/gr";
 import { FaTachometerAlt, FaBoxes } from "react-icons/fa";
+import { CustomLink } from "./link";
 
 interface DrawerInterface {
   open: boolean;
-  hanlde: () => void;
+  handle: () => void;
 }
 
 export const Drawer = (props: DrawerInterface) => {
-  const { open, hanlde } = props;
+  const { open, handle } = props;
 
-  const isAdmin: boolean = false;
+  const isAdmin: boolean = true;
 
   return (
     <div className="relative">
       {open && (
         <div
           className={twMerge("fixed inset-0 z-30", "bg-black/50")}
-          onClick={hanlde}
+          onClick={handle}
         />
       )}
 
@@ -44,71 +44,49 @@ export const Drawer = (props: DrawerInterface) => {
             )}
           >
             <PiSteeringWheelDuotone size={40} color={colors.neutral[400]} />
-            <Button variant="ghost" className="w-fit" onClick={hanlde}>
+            <Button variant="ghost" className="w-fit" onClick={handle}>
               <CgClose size={20} color={colors.neutral[400]} />
             </Button>
           </div>
 
           <nav className="p-4 space-y-2">
+            <CustomLink
+              beforeHandle={handle}
+              to="product"
+              Icon={FaTachometerAlt}
+              label="Home"
+            />
             {isAdmin && (
               <>
-                <Link
+                <CustomLink
+                  beforeHandle={handle}
                   to="admin"
-                  className={twMerge(
-                    "flex items-center gap-[14px]",
-                    "px-3 py-2 rounded",
-                    "hover:bg-gray-100"
-                  )}
-                >
-                  <GrUserAdmin size={20} color={colors.neutral[400]} /> Painel
-                  do admin
-                </Link>
-                <Link
+                  Icon={GrUserAdmin}
+                  label="Painel do admin"
+                />
+                <CustomLink
+                  beforeHandle={handle}
                   to="admin/order"
-                  className={twMerge(
-                    "flex items-center gap-[14px]",
-                    "px-3 py-2 rounded",
-                    "hover:bg-gray-100"
-                  )}
-                >
-                  <FaBoxes size={20} color={colors.neutral[400]} /> Ver pedidos
-                </Link>
+                  Icon={FaBoxes}
+                  label="Ver pedidos"
+                />
               </>
             )}
 
-            <Link
-              to="product"
-              className={twMerge(
-                "flex items-center gap-[14px]",
-                "px-3 py-2 rounded",
-                "hover:bg-gray-100"
-              )}
-            >
-              <FaTachometerAlt size={20} color={colors.neutral[400]} /> Home
-            </Link>
-            <Link
+            <CustomLink
+              beforeHandle={handle}
               to="profile"
-              className={twMerge(
-                "flex items-center gap-[14px]",
-                "px-3 py-2 rounded",
-                "hover:bg-gray-100"
-              )}
-            >
-              <ImProfile size={20} color={colors.neutral[400]} /> Meu perfil
-            </Link>
+              Icon={ImProfile}
+              label="Meu perfil"
+            />
 
             {!isAdmin && (
-              <Link
+              <CustomLink
+                beforeHandle={handle}
                 to="profile/order"
-                className={twMerge(
-                  "flex items-center gap-[14px]",
-                  "px-3 py-2 rounded",
-                  "hover:bg-gray-100"
-                )}
-              >
-                <FaBoxes size={20} color={colors.neutral[400]} /> Ver meus
-                pedidos
-              </Link>
+                Icon={FaBoxes}
+                label="Ver meus pedidos"
+              />
             )}
           </nav>
         </div>

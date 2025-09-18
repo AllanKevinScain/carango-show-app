@@ -6,7 +6,7 @@ export const LayoutDefault = () => {
   const drawerModal = useToggle();
   return (
     <>
-      <Drawer open={drawerModal.open} hanlde={drawerModal.handle} />
+      <Drawer open={drawerModal.open} handle={drawerModal.handle} />
       <Navbar handleDrawer={drawerModal.handle} />
       <Outlet />
     </>
