@@ -6,6 +6,7 @@ import { Button } from "../button";
 import { ImProfile } from "react-icons/im";
 import { Link } from "react-router";
 import { GrUserAdmin } from "react-icons/gr";
+import { FaTachometerAlt, FaBoxes } from "react-icons/fa";
 
 interface DrawerInterface {
   open: boolean;
@@ -15,7 +16,7 @@ interface DrawerInterface {
 export const Drawer = (props: DrawerInterface) => {
   const { open, hanlde } = props;
 
-  const isAdmin: boolean = true;
+  const isAdmin: boolean = false;
 
   return (
     <div className="relative">
@@ -50,21 +51,43 @@ export const Drawer = (props: DrawerInterface) => {
 
           <nav className="p-4 space-y-2">
             {isAdmin && (
-              <Link
-                to="admin"
-                className={twMerge(
-                  "flex items-center gap-[14px]",
-                  "px-3 py-2 rounded",
-                  "hover:bg-gray-100"
-                )}
-              >
-                <GrUserAdmin size={20} color={colors.neutral[400]} /> Painel do
-                admin
-              </Link>
+              <>
+                <Link
+                  to="admin"
+                  className={twMerge(
+                    "flex items-center gap-[14px]",
+                    "px-3 py-2 rounded",
+                    "hover:bg-gray-100"
+                  )}
+                >
+                  <GrUserAdmin size={20} color={colors.neutral[400]} /> Painel
+                  do admin
+                </Link>
+                <Link
+                  to="admin/order"
+                  className={twMerge(
+                    "flex items-center gap-[14px]",
+                    "px-3 py-2 rounded",
+                    "hover:bg-gray-100"
+                  )}
+                >
+                  <FaBoxes size={20} color={colors.neutral[400]} /> Ver pedidos
+                </Link>
+              </>
             )}
 
             <Link
-              to="#"
+              to="product"
+              className={twMerge(
+                "flex items-center gap-[14px]",
+                "px-3 py-2 rounded",
+                "hover:bg-gray-100"
+              )}
+            >
+              <FaTachometerAlt size={20} color={colors.neutral[400]} /> Home
+            </Link>
+            <Link
+              to="profile"
               className={twMerge(
                 "flex items-center gap-[14px]",
                 "px-3 py-2 rounded",
@@ -73,6 +96,20 @@ export const Drawer = (props: DrawerInterface) => {
             >
               <ImProfile size={20} color={colors.neutral[400]} /> Meu perfil
             </Link>
+
+            {!isAdmin && (
+              <Link
+                to="profile/order"
+                className={twMerge(
+                  "flex items-center gap-[14px]",
+                  "px-3 py-2 rounded",
+                  "hover:bg-gray-100"
+                )}
+              >
+                <FaBoxes size={20} color={colors.neutral[400]} /> Ver meus
+                pedidos
+              </Link>
+            )}
           </nav>
         </div>
 

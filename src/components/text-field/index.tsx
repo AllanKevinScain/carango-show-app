@@ -4,14 +4,18 @@ interface TextFieldInterface {
   id: string;
   type?: string;
   placeholder?: string;
+  label?: string;
 }
 
 export const TextField = (props: TextFieldInterface) => {
+  const { label, ...restProps } = props;
   return (
-    <div className="mb-6">
-      <label htmlFor="password" className=" block text-white font-bold mb-2">
-        Senha
-      </label>
+    <div className={twMerge("flex flex-col gap-2", "w-full")}>
+      {label && (
+        <label htmlFor="password" className=" block text-white font-bold">
+          {label}
+        </label>
+      )}
       <input
         className={twMerge(
           "w-full px-3 py-2",
@@ -19,7 +23,7 @@ export const TextField = (props: TextFieldInterface) => {
           "border border-gray-300 rounded-lg",
           "placeholder-white"
         )}
-        {...props}
+        {...restProps}
       />
     </div>
   );

@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 export const Logo = () => {
   return (
     <Link
-      to="/list"
+      to="product"
       className={twMerge(
         "md:flex md:gap-[10px] md:items-center",
         "cursor-pointer",
