@@ -5,6 +5,7 @@ import {
   ProductPage,
   RegisterPage,
   AdminPage,
+  ProfilePage,
 } from "./pages";
 import { LayoutDefault, LayoutLogin } from "./layouts";
 import { CartPage } from "./pages/cart";
@@ -29,7 +30,7 @@ export const CustomRoutes = () => {
       </Route>
 
       <Route element={<LayoutDefault />}>
-        <Route index path="profile" element={<h1>Profile page</h1>} />
+        <Route index path="profile" element={<ProfilePage />} />
         <Route path="profile/order" element={<h1>Profile order</h1>} />
       </Route>
     </Routes>

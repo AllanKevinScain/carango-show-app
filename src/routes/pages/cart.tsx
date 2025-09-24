@@ -1,5 +1,5 @@
 import { Card, Container } from "@/components";
-import { CartSummary } from "@/components/cartSummary";
+import { CartSummary } from "@/components/cart-summary";
 import { twMerge } from "tailwind-merge";
 
 export function CartPage() {

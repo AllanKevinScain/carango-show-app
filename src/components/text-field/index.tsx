@@ -5,26 +5,33 @@ interface TextFieldInterface {
   type?: string;
   placeholder?: string;
   label?: string;
+  error?: string;
 }
 
 export const TextField = (props: TextFieldInterface) => {
-  const { label, ...restProps } = props;
+  const { label, error, id, ...restProps } = props;
+
   return (
-    <div className={twMerge("flex flex-col gap-2", "w-full")}>
+    <div className="flex flex-col gap-2 w-full">
       {label && (
-        <label htmlFor="password" className=" block text-white font-bold">
+        <label htmlFor={id} className="block text-white font-bold">
           {label}
         </label>
       )}
       <input
+        id={id}
         className={twMerge(
           "w-full px-3 py-2",
-          "focus:outline-none focus:ring-2 focus:ring-blue-500",
-          "border border-gray-300 rounded-lg",
+          "focus:outline-none focus:ring-2",
+          error
+            ? "border-red-500 focus:ring-red-500"
+            : "border-gray-300 focus:ring-blue-500",
+          "border rounded-lg",
           "placeholder-white"
         )}
         {...restProps}
       />
+      {error && <span className="text-red-500 text-sm">{error}</span>}
     </div>
   );
 };

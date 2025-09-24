@@ -41,6 +41,13 @@ export function LoginPage() {
           <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
             Entrar
           </Button>
+
+          <p className="text-center text-white mt-4">
+            Não tem conta?{" "}
+            <a href="/register" className="text-blue-400 hover:underline">
+              Faça o cadastro
+            </a>
+          </p>
         </form>
       </div>
     </div>
