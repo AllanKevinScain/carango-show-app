@@ -108,17 +108,16 @@ export function RegisterPage() {
                 htmlFor="gender"
                 className="block text-white font-bold mb-2"
               >
-                Sexo
+                Gênero
               </label>
               <select
                 id="gender"
-                {...register("gender", { required: "O sexo é obrigatório" })}
+                {...register("gender", { required: "O gênero é obrigatório" })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="">Selecione</option>
                 <option value="masculino">Masculino</option>
                 <option value="feminino">Feminino</option>
-                <option value="outro">Outro</option>
               </select>
               {errors.gender && (
                 <p className="text-red-400 text-sm">{errors.gender.message}</p>

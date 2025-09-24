@@ -1,17 +1,13 @@
 import { Drawer, Navbar } from "@/components";
-import { useState } from "react";
+import { useToggle } from "@/hooks";
 import { Outlet } from "react-router";
 
 export const LayoutDefault = () => {
-  const [open, setOpen] = useState(false);
-
-  function handleDrawer() {
-    setOpen((s) => !s);
-  }
+  const drawerModal = useToggle();
   return (
     <>
-      <Drawer open={open} hanlde={handleDrawer} />
-      <Navbar handleDrawer={handleDrawer} />
+      <Drawer open={drawerModal.open} handle={drawerModal.handle} />
+      <Navbar handleDrawer={drawerModal.handle} />
       <Outlet />
     </>
   );

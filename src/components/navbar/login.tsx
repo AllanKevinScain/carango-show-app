@@ -8,7 +8,7 @@ export const LoginButton = () => {
 
   return (
     <Link
-      to="login"
+      to="/"
       onMouseEnter={() => setAnimation(true)}
       onMouseLeave={() => setAnimation(false)}
       className={twMerge(

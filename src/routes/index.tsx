@@ -26,7 +26,12 @@ export const CustomRoutes = () => {
 
       <Route element={<LayoutDefault />}>
         <Route index path="admin" element={<AdminPage />} />
-        <Route path="profile" element={<ProfilePage />} />
+        <Route path="admin/order" element={<h1>admin order</h1>} />
+      </Route>
+
+      <Route element={<LayoutDefault />}>
+        <Route index path="profile" element={<ProfilePage />} />
+        <Route path="profile/order" element={<h1>Profile order</h1>} />
       </Route>
     </Routes>
   );

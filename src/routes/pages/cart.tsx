@@ -1,6 +1,5 @@
-import { Container } from "@/components";
-import { CartItem } from "@/components/cartItem";
-import { CartSummary } from "@/components/cartSummary";
+import { Card, Container } from "@/components";
+import { CartSummary } from "@/components/cart-summary";
 import { twMerge } from "tailwind-merge";
 
 export function CartPage() {
@@ -43,11 +42,12 @@ export function CartPage() {
           Seu Carrinho
         </h1>
         {cars.map((car) => (
-          <CartItem
+          <Card.table
             name={car.name}
             description={car.type}
             price={car.pricePerDay * car.days}
             thumbnail={car.thumbnail}
+            href="#"
           />
         ))}
       </div>

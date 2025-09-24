@@ -1,34 +1,37 @@
 import { twMerge } from "tailwind-merge";
 
-interface TextFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label: string;
+interface TextFieldInterface {
+  id: string;
+  type?: string;
+  placeholder?: string;
+  label?: string;
   error?: string;
 }
 
-export const TextField = ({
-  label,
-  error,
-  className,
-  ...props
-}: TextFieldProps) => {
+export const TextField = (props: TextFieldInterface) => {
+  const { label, error, id, ...restProps } = props;
+
   return (
-    <div className="mb-4">
-      <label htmlFor={props.id} className="block text-white font-bold mb-2">
-        {label}
-      </label>
-
+    <div className="flex flex-col gap-2 w-full">
+      {label && (
+        <label htmlFor={id} className="block text-white font-bold">
+          {label}
+        </label>
+      )}
       <input
-        {...props}
+        id={id}
         className={twMerge(
-          "w-full px-3 py-2 border border-gray-300 rounded-lg",
-          "focus:outline-none focus:ring-2 focus:ring-blue-500",
-          "placeholder-white",
-          error && "border-red-500 focus:ring-red-400",
-          className
+          "w-full px-3 py-2",
+          "focus:outline-none focus:ring-2",
+          error
+            ? "border-red-500 focus:ring-red-500"
+            : "border-gray-300 focus:ring-blue-500",
+          "border rounded-lg",
+          "placeholder-white"
         )}
+        {...restProps}
       />
-
-      {error && <p className="text-red-400 text-sm mt-1">{error}</p>}
+      {error && <span className="text-red-500 text-sm">{error}</span>}
     </div>
   );
 };
