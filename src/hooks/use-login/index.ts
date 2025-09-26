@@ -16,8 +16,8 @@ export function useLogin() {
   const logingMethods = useForm<LoginInfertype>({
     resolver: yupResolver(loginSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: "administrador@example.com",
+      password: "admin1",
     },
   });
 
