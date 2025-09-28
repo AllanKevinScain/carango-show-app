@@ -1,18 +1,20 @@
 import { api } from "@/api";
 import { Button, TextField } from "@/components";
-import { useLogin, type LoginInfertype } from "@/hooks";
+import { useLogin, useSession, type LoginInfertype } from "@/hooks";
+
 import toast from "react-hot-toast";
 import { twMerge } from "tailwind-merge";
 
 export function LoginPage() {
   const { logingMethods } = useLogin();
+  const { login } = useSession();
 
   async function signIn(values: LoginInfertype) {
     const res = await api.post("/auth", values);
     if (res.status !== 200) {
       return toast.error("Ocorreu um erro");
     }
-
+    login(res.data.token);
     return toast.success("Login efetuado com sucesso!");
   }
 

@@ -9,7 +9,6 @@ import { currencyFormatterForFixValues } from "@/helpers";
 
 export function ProductPage() {
   const { id } = useParams();
-
   const product = {
     id,
     carName: "Nissan GT - R",
