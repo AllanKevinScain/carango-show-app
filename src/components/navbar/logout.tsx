@@ -1,30 +1,29 @@
 import { useState } from "react";
-import { BiLogInCircle } from "react-icons/bi";
-import { Link } from "react-router";
 import { twMerge } from "tailwind-merge";
+import { Button } from "../button";
+import { CiLogout } from "react-icons/ci";
+import { useSession } from "@/hooks";
 
-export const LoginButton = () => {
+export const LogoutButton = () => {
   const [activeAnimation, setAnimation] = useState(false);
+  const { logout } = useSession();
 
   return (
-    <Link
-      to="/"
+    <Button
+      variant="ghost"
+      className={twMerge("text-blue-400 w-fit", "hover:bg-transparent")}
       onMouseEnter={() => setAnimation(true)}
       onMouseLeave={() => setAnimation(false)}
-      className={twMerge(
-        "text-blue-400",
-        "flex items-center justify-center gap-[10px]",
-        "cursor-pointer"
-      )}
+      onClick={logout}
     >
       <div className="w-fit overflow-hidden">
         <span
           className={twMerge(activeAnimation ? "show-text" : "hidden-text")}
         >
-          Olá, Allan Kevin Scain
+          Deseja sair Allan Kevin Scain?
         </span>
       </div>
-      <BiLogInCircle size={40} />
-    </Link>
+      <CiLogout size={40} />
+    </Button>
   );
 };

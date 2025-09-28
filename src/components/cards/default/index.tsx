@@ -14,22 +14,29 @@ import { currencyFormatterForFixValues } from "@/helpers";
 
 interface DefaultCardProps {
   href: string;
-  carName: string;
-  carType: string;
-  carPrice: number;
-  carThumbnail: string;
+  name: string;
+  trade: string;
+  model: string;
+  year: string;
+  price: number;
+  specifications?: string[];
+  thumb?: string;
 }
 
 export const DefaultCard = (props: DefaultCardProps) => {
   const {
-    carName = "",
-    carPrice = 0,
-    carThumbnail = "",
-    carType = "",
+    name = "Nome não cadastrado",
+    price = 0,
+    thumb = "https://ih1.redbubble.net/image.4905811447.8675/flat,750x,075,f-pad,750x1000,f8f8f8.jpg",
     href = "#",
+    trade = "Tipo não cadastrado",
+    year = new Date(),
+    model = "Modelo não cadastrado",
+    // specifications = [],
   } = props;
 
   const qty: number = 0;
+  const carYear = new Date(year);
 
   return (
     <Link to={href}>
@@ -41,10 +48,10 @@ export const DefaultCard = (props: DefaultCardProps) => {
           "hover:shadow-2xl"
         )}
       >
-        <h5 className="text-[20px] font-bold text-blue-950">{carName}</h5>
-        <span className="text-[14px] font-bold text-gray-400">{carType}</span>
+        <h5 className="text-[20px] font-bold text-blue-950">{name}</h5>
+        <span className="text-[14px] font-bold text-gray-400">{model}</span>
         <img
-          src={carThumbnail}
+          src={thumb}
           className={twMerge("max-h-[200px]", "object-contain")}
         />
 
@@ -77,17 +84,13 @@ export const DefaultCard = (props: DefaultCardProps) => {
           <div className="flex flex-col w-full">
             <span className="text-[20px] font-bold text-blue-950">
               {currencyFormatterForFixValues({
-                value: carPrice,
+                value: price,
                 qtyDecimal: 2,
                 showR$: true,
               })}
             </span>
-            <span className="text-[14px] font-bold text-gray-400 line-through">
-              {currencyFormatterForFixValues({
-                value: 100,
-                qtyDecimal: 2,
-                showR$: true,
-              })}
+            <span className="text-[14px] font-bold text-gray-400 underline">
+              {trade}, {carYear.toLocaleDateString("pt-BR")}
             </span>
           </div>
           <Button className="h-full">Comprar agora</Button>

@@ -2,10 +2,17 @@ import { Button, Container, TextField } from "@/components";
 import { twMerge } from "tailwind-merge";
 import { CreateModal, EditModal, List } from "./components";
 import { useToggle } from "@/hooks";
+import { useForm } from "react-hook-form";
 
 export function AdminPage() {
   const editModal = useToggle();
   const createModal = useToggle();
+
+  const { control } = useForm({
+    defaultValues: {
+      search: "",
+    },
+  });
 
   return (
     <>
@@ -29,7 +36,7 @@ export function AdminPage() {
           </Button>
         </div>
         <div className={twMerge("flex gap-[24px] items-center", "w-full")}>
-          <TextField id="search" placeholder="Pesquisar..." />
+          <TextField id="search" placeholder="Pesquisar..." control={control} />
           <Button className="w-fit h-fit px-3 py-2">Pesquisar</Button>
         </div>
 
