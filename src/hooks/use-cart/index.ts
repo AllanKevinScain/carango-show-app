@@ -5,6 +5,7 @@ import type { GetCartItemsInterface } from "./use-cart.type";
 import toast from "react-hot-toast";
 import { customToast } from "@/components";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import type { AxiosError } from "axios";
 
 const _cartItemSchema = yup.object().shape({
   id: yup.number(),
@@ -49,12 +50,35 @@ export function useCart() {
     }
   }
 
-  function clearCart() {}
+  async function clearCart() {
+    try {
+      await api.delete("/cart/clear");
+      toast.success("Carrinho limpo com sucesso!");
+    } catch (error) {
+      const aux = error as AxiosError<{ message: string }>;
+      return toast.error(aux?.response?.data?.message || "Erro deconhecido");
+    }
+  }
+
+  async function checkout() {
+    try {
+      const res = await api.post("/cart/checkout");
+      if (res.status === 200) {
+        return toast.success("Pedido realizado com sucesso");
+      }
+
+      return toast.success("Carrinho vazio");
+    } catch (error) {
+      const aux = error as AxiosError<{ message: string }>;
+      return toast.error(aux?.response?.data?.message || "Erro deconhecido");
+    }
+  }
 
   return {
     addToCart: addToCartMutation,
     removeToCart,
     clearCart,
     getCartItems,
+    checkout,
   };
 }

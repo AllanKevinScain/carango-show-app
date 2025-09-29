@@ -10,7 +10,7 @@ import { useNavigate } from "react-router";
 export function CartPage() {
   const router = useNavigate();
 
-  const { getCartItems, removeToCart } = useCart();
+  const { getCartItems, removeToCart, clearCart, checkout } = useCart();
 
   const query = useQuery({
     queryKey: ["cart-items"],
@@ -21,6 +21,17 @@ export function CartPage() {
 
   async function removeItem(id: number) {
     await removeToCart(id).then(() => query.refetch());
+  }
+
+  async function clearItems() {
+    await clearCart().then(() => query.refetch());
+  }
+
+  async function endOrder() {
+    await checkout().then(() => {
+      router("/congratulations");
+      query.refetch();
+    });
   }
 
   return (
@@ -65,7 +76,11 @@ export function CartPage() {
         )}
       </div>
       {!query.isLoading && hasItems && (
-        <CartSummary total={query.data?.total || 0} />
+        <CartSummary
+          total={query.data?.total || 0}
+          clearCart={clearItems}
+          checkout={endOrder}
+        />
       )}
     </Container>
   );

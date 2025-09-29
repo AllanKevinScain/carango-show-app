@@ -10,6 +10,7 @@ import {
 import { LayoutDefault, LayoutLogin } from "./layouts";
 import { CartPage } from "./pages/cart";
 import { QueryProvider, SessionProvider } from "@/providers";
+import { OrderPage } from "./pages/order";
 
 export const CustomRoutes = () => {
   return (
@@ -25,11 +26,15 @@ export const CustomRoutes = () => {
             <Route index path="product" element={<ListPage />} />
             <Route path="product/:productId" element={<ProductPage />} />
             <Route path="cart" element={<CartPage />} />
+            <Route
+              path="congratulations"
+              element={<h1>Parabéns voce finalizou o pedido!</h1>}
+            />
           </Route>
 
           <Route element={<LayoutDefault />}>
             <Route index path="admin" element={<AdminPage />} />
-            <Route path="admin/order" element={<h1>admin order</h1>} />
+            <Route path="order" element={<OrderPage />} />
           </Route>
 
           <Route element={<LayoutDefault />}>

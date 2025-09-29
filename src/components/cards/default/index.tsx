@@ -1,11 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import { BsFillFuelPumpFill } from "react-icons/bs";
-import { PiSteeringWheelDuotone } from "react-icons/pi";
-
-import { FaUser } from "react-icons/fa6";
-import { HiMiniUsers } from "react-icons/hi2";
-import { FaUsers } from "react-icons/fa";
-import { PiUsersFourBold } from "react-icons/pi";
+import { FaCalendar, FaTag } from "react-icons/fa";
 import { Button } from "@/components";
 
 import colors from "tailwindcss/colors";
@@ -33,7 +27,6 @@ export const DefaultCard = (props: DefaultCardProps) => {
     model = "Modelo não cadastrado",
   } = props;
 
-  const qty: number = 0;
   const carYear = new Date(year);
 
   return (
@@ -56,20 +49,13 @@ export const DefaultCard = (props: DefaultCardProps) => {
 
         <div className="flex justify-between overflow-hidden">
           <div className="flex items-center gap-[4px]">
-            <BsFillFuelPumpFill color={colors.gray[400]} />
-            <span className="text-[14px] font-bold text-gray-400">80L</span>
+            <FaTag color={colors.gray[400]} />
+            <span className="text-[14px] font-bold text-gray-400">{trade}</span>
           </div>
           <div className="flex items-center gap-[4px]">
-            <PiSteeringWheelDuotone color={colors.gray[400]} />
-            <span className="text-[14px] font-bold text-gray-400">Manual</span>
-          </div>
-          <div className="flex items-center gap-[4px]">
-            {qty === 2 && <HiMiniUsers color={colors.gray[400]} />}
-            {qty === 3 && <FaUsers color={colors.gray[400]} />}
-            {qty === 4 && <PiUsersFourBold color={colors.gray[400]} />}
-            {qty === 0 && <FaUser color={colors.gray[400]} />}
+            <FaCalendar color={colors.gray[400]} />
             <span className="text-[14px] font-bold text-gray-400">
-              2 People
+              {carYear.toLocaleDateString("pt-BR")}
             </span>
           </div>
         </div>

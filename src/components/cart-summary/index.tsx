@@ -3,9 +3,11 @@ import { Button } from "@/components";
 
 interface CartSummaryProps {
   total: number;
+  clearCart: () => void;
+  checkout: () => void;
 }
 
-export function CartSummary({ total }: CartSummaryProps) {
+export function CartSummary({ total, clearCart, checkout }: CartSummaryProps) {
   return (
     <div
       className={twMerge(
@@ -16,22 +18,23 @@ export function CartSummary({ total }: CartSummaryProps) {
       <h2 className="text-xl font-bold">Card Details</h2>
 
       <div className="flex flex-col gap-[8px]">
-        {/* <span className="flex justify-between">
-          <span>Valor carro</span>
-          <span>${subtotal.toFixed(2)}</span>
-        </span>
-        <span className="flex justify-between">
-          <span>Frete</span>
-          <span>${shipping.toFixed(2)}</span>
-        </span> */}
         <span className="flex justify-between font-bold text-lg">
           <span>Total</span>
           <span>${total.toFixed(2)}</span>
         </span>
       </div>
 
-      <Button className="w-full bg-blue-950 hover:bg-blue-900 cursor-pointer h-10">
+      <Button
+        className="w-full bg-blue-950 hover:bg-blue-900 cursor-pointer h-10"
+        onClick={checkout}
+      >
         Finalizar Compra
+      </Button>
+      <Button
+        className="w-full bg-white hover:bg-gray-100 cursor-pointer h-10 text-blue-950"
+        onClick={clearCart}
+      >
+        Limpar Carrinho
       </Button>
     </div>
   );

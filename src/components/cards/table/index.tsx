@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import { FiTrash2 } from "react-icons/fi";
+import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import { Link } from "react-router";
 import { Button } from "@/components";
 
@@ -7,12 +7,13 @@ interface CartItemProps {
   name: string;
   price: number;
   thumbnail: string;
-  href: string;
+  href?: string;
   onRemove?: () => void;
+  onEdit?: () => void;
 }
 
 export const TableCard = (props: CartItemProps) => {
-  const { name, price, thumbnail, href = "#", onRemove } = props;
+  const { name, price, thumbnail, href = "#", onRemove, onEdit } = props;
 
   return (
     <Link to={href}>
@@ -35,6 +36,19 @@ export const TableCard = (props: CartItemProps) => {
           <span className="text-lg font-bold text-blue-950">
             ${price.toFixed(2)}
           </span>
+          {onEdit && (
+            <Button
+              variant="ghost"
+              onClick={onEdit}
+              className={twMerge(
+                "text-blue-500 w-fit h-full",
+                "transition",
+                "hover:text-blue-700"
+              )}
+            >
+              <FiEdit2 size={20} />
+            </Button>
+          )}
           {onRemove && (
             <Button
               variant="ghost"

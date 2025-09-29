@@ -1,11 +1,10 @@
 import { Button, Container, TextField } from "@/components";
 import { twMerge } from "tailwind-merge";
-import { CreateModal, EditModal, List } from "./components";
+import { CreateModal, List } from "./components";
 import { useToggle } from "@/hooks";
 import { useForm } from "react-hook-form";
 
 export function AdminPage() {
-  const editModal = useToggle();
   const createModal = useToggle();
 
   const { control } = useForm({
@@ -16,7 +15,6 @@ export function AdminPage() {
 
   return (
     <>
-      <EditModal open={editModal.open} handle={editModal.handle} />
       <CreateModal open={createModal.open} handle={createModal.handle} />
 
       <Container
