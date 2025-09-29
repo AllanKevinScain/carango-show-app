@@ -1,17 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type {
   SessionInterface,
   SessionProviderInterface,
 } from "./session.type";
 import { SessionContext } from "./context";
 import { jwtDecode } from "jwt-decode";
-import { removeCookie, setCookie } from "@/helpers";
+import { getCookie, removeCookie, setCookie } from "@/helpers";
 import { SESSION_TOKEN_NAME } from "@/utils";
 
 export const SessionProvider = (props: SessionProviderInterface) => {
   const { children } = props;
 
   const [session, setSession] = useState<SessionInterface | null>(null);
+  const [loading, setLoading] = useState(true);
 
   function signIn(token: string) {
     const decoded = jwtDecode(token) as SessionInterface;
@@ -24,10 +25,27 @@ export const SessionProvider = (props: SessionProviderInterface) => {
     removeCookie(SESSION_TOKEN_NAME);
   }
 
+  useEffect(() => {
+    const token = getCookie(SESSION_TOKEN_NAME);
+
+    if (token) {
+      try {
+        setSession(jwtDecode(token) as SessionInterface);
+      } catch {
+        setSession(null);
+      }
+    } else {
+      setSession(null);
+    }
+
+    setLoading(false);
+  }, []);
+
   return (
     <SessionContext.Provider
       value={{
         session,
+        loading,
         signIn,
         signOut,
       }}
@@ -36,30 +54,3 @@ export const SessionProvider = (props: SessionProviderInterface) => {
     </SessionContext.Provider>
   );
 };
-
-/*
-const STORAGE_KEY = "myapp_auth";
-
-function saveToStorage(token: string, user: User) {
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify({ token, user, savedAt: new Date().toISOString() })
-  );
-}
-
-function removeFromStorage() {
-  localStorage.removeItem(STORAGE_KEY);
-}
-
-function readFromStorage(): { token: string; user: User } | null {
-  const raw = localStorage.getItem(STORAGE_KEY);
-  if (!raw) return null;
-  try {
-    const parsed = JSON.parse(raw);
-    if (parsed.token && parsed.user) return { token: parsed.token, user: parsed.user };
-  } catch (e) {
-    // ignore parse errors
-  }
-  return null;
-}
-*/

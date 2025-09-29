@@ -10,6 +10,7 @@ export interface SessionInterface {
 
 export interface SessionContextInterface {
   session: SessionInterface | null;
+  loading: boolean;
   signIn: (_: string) => void;
   signOut: () => void;
 }

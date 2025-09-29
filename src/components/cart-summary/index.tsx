@@ -2,12 +2,10 @@ import { twMerge } from "tailwind-merge";
 import { Button } from "@/components";
 
 interface CartSummaryProps {
-  subtotal: number;
-  shipping: number;
   total: number;
 }
 
-export function CartSummary({ subtotal, shipping, total }: CartSummaryProps) {
+export function CartSummary({ total }: CartSummaryProps) {
   return (
     <div
       className={twMerge(
@@ -18,14 +16,14 @@ export function CartSummary({ subtotal, shipping, total }: CartSummaryProps) {
       <h2 className="text-xl font-bold">Card Details</h2>
 
       <div className="flex flex-col gap-[8px]">
-        <span className="flex justify-between">
+        {/* <span className="flex justify-between">
           <span>Valor carro</span>
           <span>${subtotal.toFixed(2)}</span>
         </span>
         <span className="flex justify-between">
           <span>Frete</span>
           <span>${shipping.toFixed(2)}</span>
-        </span>
+        </span> */}
         <span className="flex justify-between font-bold text-lg">
           <span>Total</span>
           <span>${total.toFixed(2)}</span>

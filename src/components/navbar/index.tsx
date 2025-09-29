@@ -4,6 +4,7 @@ import { LogoutButton } from "./logout";
 import { Container } from "../container";
 import { BiMenu } from "react-icons/bi";
 import { Button } from "../button";
+import { CartButton } from "./cart-button";
 
 interface NavbarInterface {
   handleDrawer: () => void;
@@ -26,7 +27,10 @@ export const Navbar = (props: NavbarInterface) => {
           <Logo />
         </div>
 
-        <LogoutButton />
+        <div className="flex items-center gap-[14px]">
+          <LogoutButton />
+          <CartButton />
+        </div>
       </Container>
     </nav>
   );

@@ -1,10 +1,16 @@
 import { Card, Container } from "@/components";
-import { useProduct } from "@/hooks";
+import { useProduct, type ProducInfertype } from "@/hooks";
+import { useQuery } from "@tanstack/react-query";
 import { FaTruckLoading } from "react-icons/fa";
 import { twMerge } from "tailwind-merge";
 
 export function ListPage() {
-  const products = useProduct();
+  const { listProducts } = useProduct();
+
+  const products = useQuery<ProducInfertype[]>({
+    queryKey: ["list-products"],
+    queryFn: listProducts,
+  });
 
   if (products.isLoading) {
     return (
@@ -28,11 +34,7 @@ export function ListPage() {
       {products.data?.map((product, index) => {
         const { id: _, ...restProduct } = product;
         return (
-          <Card.default
-            key={index}
-            href={`product/${product.id}`}
-            {...restProduct}
-          />
+          <Card.default key={index} href={`${product.id}`} {...restProduct} />
         );
       })}
     </Container>

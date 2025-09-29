@@ -1,10 +1,10 @@
 import { twMerge } from "tailwind-merge";
 import { FiTrash2 } from "react-icons/fi";
 import { Link } from "react-router";
+import { Button } from "@/components";
 
 interface CartItemProps {
   name: string;
-  description: string;
   price: number;
   thumbnail: string;
   href: string;
@@ -12,7 +12,7 @@ interface CartItemProps {
 }
 
 export const TableCard = (props: CartItemProps) => {
-  const { name, description, price, thumbnail, href = "#", onRemove } = props;
+  const { name, price, thumbnail, href = "#", onRemove } = props;
 
   return (
     <Link to={href}>
@@ -28,10 +28,7 @@ export const TableCard = (props: CartItemProps) => {
             alt={name}
             className="w-[64px] h-[64px] object-cover rounded-md"
           />
-          <div className="flex flex-col">
-            <span className="font-bold text-blue-950">{name}</span>
-            <span className="text-sm text-gray-400">{description}</span>
-          </div>
+          <span className="font-bold text-blue-950">{name}</span>
         </div>
 
         <div className="flex items-center gap-[16px]">
@@ -39,12 +36,20 @@ export const TableCard = (props: CartItemProps) => {
             ${price.toFixed(2)}
           </span>
           {onRemove && (
-            <button
-              onClick={onRemove}
-              className="text-red-500 hover:text-red-700 transition"
+            <Button
+              variant="ghost"
+              onClick={(e) => {
+                e.preventDefault();
+                onRemove();
+              }}
+              className={twMerge(
+                "text-red-500 w-fit h-full",
+                "transition",
+                "hover:text-red-700"
+              )}
             >
               <FiTrash2 size={20} />
-            </button>
+            </Button>
           )}
         </div>
       </div>

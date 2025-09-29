@@ -1,5 +1,4 @@
 import { api } from "@/api";
-import { useQuery } from "@tanstack/react-query";
 import * as yup from "yup";
 
 export const productSchema = yup.object().shape({
@@ -21,10 +20,13 @@ export function useProduct() {
     return response.data;
   }
 
-  const query = useQuery<ProducInfertype[]>({
-    queryKey: ["list-products"],
-    queryFn: listProducts,
-  });
+  async function getProductById(id: string) {
+    const response = await api.get(`/product/${id}`);
+    return response.data;
+  }
 
-  return query;
+  return {
+    listProducts,
+    getProductById,
+  };
 }

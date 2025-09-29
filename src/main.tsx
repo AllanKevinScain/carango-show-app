@@ -11,6 +11,11 @@ createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
       <CustomRoutes />
     </BrowserRouter>
-    <Toaster position="top-right" />
+    <Toaster
+      position="top-right"
+      toastOptions={{
+        className: "mt-[80px]",
+      }}
+    />
   </StrictMode>
 );

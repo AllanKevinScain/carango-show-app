@@ -5,4 +5,5 @@ export const SessionContext = createContext<SessionContextInterface>({
   session: null,
   signIn: () => null,
   signOut: () => null,
+  loading: true,
 });

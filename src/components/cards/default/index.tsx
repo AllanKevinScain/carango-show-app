@@ -19,7 +19,6 @@ interface DefaultCardProps {
   model: string;
   year: string;
   price: number;
-  specifications?: string[];
   thumb?: string;
 }
 
@@ -32,7 +31,6 @@ export const DefaultCard = (props: DefaultCardProps) => {
     trade = "Tipo não cadastrado",
     year = new Date(),
     model = "Modelo não cadastrado",
-    // specifications = [],
   } = props;
 
   const qty: number = 0;
@@ -52,6 +50,7 @@ export const DefaultCard = (props: DefaultCardProps) => {
         <span className="text-[14px] font-bold text-gray-400">{model}</span>
         <img
           src={thumb}
+          alt={name}
           className={twMerge("max-h-[200px]", "object-contain")}
         />
 

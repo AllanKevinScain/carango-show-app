@@ -40,3 +40,33 @@ body {
     opacity: 0;
   }
 }
+
+@keyframes toast-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-20%) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes toast-out {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20%) scale(0.95);
+  }
+}
+
+.animate-custom-enter {
+  animation: toast-in 0.3s ease-out forwards;
+}
+
+.animate-custom-leave {
+  animation: toast-out 0.25s ease-in forwards;
+}
