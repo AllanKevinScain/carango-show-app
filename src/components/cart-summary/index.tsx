@@ -5,9 +5,17 @@ interface CartSummaryProps {
   subtotal: number;
   shipping: number;
   total: number;
+  clearCart: () => void;
+  checkout: () => void;
 }
 
-export function CartSummary({ subtotal, shipping, total }: CartSummaryProps) {
+export function CartSummary({
+  subtotal,
+  shipping,
+  total,
+  clearCart,
+  checkout,
+}: CartSummaryProps) {
   return (
     <div
       className={twMerge(
@@ -19,7 +27,7 @@ export function CartSummary({ subtotal, shipping, total }: CartSummaryProps) {
 
       <div className="flex flex-col gap-[8px]">
         <span className="flex justify-between">
-          <span>Valor carro</span>
+          <span>Valor</span>
           <span>${subtotal.toFixed(2)}</span>
         </span>
         <span className="flex justify-between">
@@ -32,8 +40,17 @@ export function CartSummary({ subtotal, shipping, total }: CartSummaryProps) {
         </span>
       </div>
 
-      <Button className="w-full bg-blue-950 hover:bg-blue-900 cursor-pointer h-10">
+      <Button
+        className="w-full bg-blue-950 hover:bg-blue-900 cursor-pointer h-10"
+        onClick={checkout}
+      >
         Finalizar Compra
+      </Button>
+      <Button
+        className="w-full bg-white hover:bg-gray-100 cursor-pointer h-10 text-blue-950"
+        onClick={clearCart}
+      >
+        Limpar Carrinho
       </Button>
     </div>
   );

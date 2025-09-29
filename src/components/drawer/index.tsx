@@ -3,7 +3,7 @@ import { PiSteeringWheelDuotone } from "react-icons/pi";
 import { twMerge } from "tailwind-merge";
 import colors from "tailwindcss/colors";
 import { Button } from "../button";
-import { ImProfile } from "react-icons/im";
+import { ImCart, ImProfile } from "react-icons/im";
 import { GrUserAdmin } from "react-icons/gr";
 import { FaTachometerAlt, FaBoxes } from "react-icons/fa";
 import { CustomLink } from "./link";
@@ -66,7 +66,7 @@ export const Drawer = (props: DrawerInterface) => {
                 />
                 <CustomLink
                   beforeHandle={handle}
-                  to="admin/order"
+                  to="order"
                   Icon={FaBoxes}
                   label="Ver pedidos"
                 />
@@ -78,6 +78,13 @@ export const Drawer = (props: DrawerInterface) => {
               to="profile"
               Icon={ImProfile}
               label="Meu perfil"
+            />
+
+            <CustomLink
+              beforeHandle={handle}
+              to="cart"
+              Icon={ImCart}
+              label="Carrinho"
             />
 
             {!isAdmin && (
