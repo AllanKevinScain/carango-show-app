@@ -28,11 +28,7 @@ export function ListPage() {
       {products.data?.map((product, index) => {
         const { id: _, ...restProduct } = product;
         return (
-          <Card.default
-            key={index}
-            href={`product/${product.id}`}
-            {...restProduct}
-          />
+          <Card.default key={index} href={`${product.id}`} {...restProduct} />
         );
       })}
     </Container>

@@ -1,10 +1,12 @@
 export interface ModalInterface {
   open: boolean;
   handle: () => void;
+  title?: string;
+  children?: React.ReactNode;
 }
 
 export const Modal = (props: ModalInterface) => {
-  const { open, handle } = props;
+  const { open, handle, title, children } = props;
 
   return (
     <div className="relative">
@@ -19,9 +21,7 @@ export const Modal = (props: ModalInterface) => {
       >
         <div className="bg-white w-96 rounded-2xl shadow-lg overflow-hidden">
           <div className="flex justify-between items-center p-4 border-b border-neutral-200">
-            <h2 className="text-lg font-semibold text-neutral-800">
-              Título do Modal
-            </h2>
+            <h2 className="text-lg font-semibold text-neutral-800">{title}</h2>
             <button
               onClick={handle}
               className="text-neutral-500 hover:text-neutral-700"
@@ -30,24 +30,7 @@ export const Modal = (props: ModalInterface) => {
             </button>
           </div>
 
-          <div className="p-4 text-neutral-700">
-            <p>
-              Este é um exemplo de modal simples feito apenas com React +
-              TailwindCSS.
-            </p>
-          </div>
-
-          <div className="flex justify-end gap-2 p-4 border-t border-neutral-200">
-            <button
-              onClick={handle}
-              className="px-4 py-2 rounded-lg border border-neutral-300 text-neutral-700 hover:bg-neutral-100"
-            >
-              Cancelar
-            </button>
-            <button className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
-              Confirmar
-            </button>
-          </div>
+          <div>{children}</div>
         </div>
       </div>
     </div>
