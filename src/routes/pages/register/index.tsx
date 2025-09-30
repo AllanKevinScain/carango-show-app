@@ -1,29 +1,23 @@
 import { api } from "@/api";
 import { Button, TextField } from "@/components";
-import {
-  useRegister,
-  useSession,
-  type LoginInfertype,
-  type RegisterInfertype,
-} from "@/hooks";
+import { useRegister, type RegisterInfertype } from "@/hooks";
 import type { AxiosError } from "axios";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 export function RegisterPage() {
+  const router = useNavigate();
+
   const { registerMethods } = useRegister();
   const { handleSubmit, control } = registerMethods;
-  const { login } = useSession();
+
   async function onSubmit(data: RegisterInfertype) {
     const { confirmPassword: _, ...restValues } = data;
     try {
       const response = await api.post("/user", restValues);
       if (response.status === 201) {
         toast.success("Conta criada com sucesso!");
-
-        await signIn({
-          email: restValues.email,
-          password: restValues.password,
-        });
+        router("/");
 
         return;
       }
@@ -32,15 +26,6 @@ export function RegisterPage() {
       const aux = error as AxiosError<{ message: string }>;
       return toast.error(aux?.response?.data?.message || "Erro deconhecido");
     }
-  }
-
-  async function signIn(values: LoginInfertype) {
-    const res = await api.post("/auth", values);
-    if (res.status !== 200) {
-      return toast.error("Ocorreu um erro");
-    }
-    login(res.data.token);
-    return toast.success("Login efetuado com sucesso!");
   }
 
   return (

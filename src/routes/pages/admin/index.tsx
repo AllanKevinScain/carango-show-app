@@ -39,14 +39,6 @@ export function AdminPage() {
         </div>
 
         <List />
-
-        {/* <TextField id="thumb" />
-          <TextField id="name" placeholder="Nome" />
-          <TextField id="trade" placeholder="Marca" />
-          <TextField id="model" placeholder="Modelo" />
-          <TextField id="year" placeholder="Ano" />
-          <TextField id="price" placeholder="Valor" />
-          <TextField id="specifications" placeholder="Specificações" /> */}
       </Container>
     </>
   );

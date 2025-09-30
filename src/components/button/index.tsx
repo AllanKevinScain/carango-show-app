@@ -39,7 +39,7 @@ export const Button = (props: ButtonProps) => {
       {...restprops}
     >
       {isLoading ? (
-        <FaTruckLoading className="animate-spin" size={30} />
+        <FaTruckLoading className="animate-spin" size={24} />
       ) : (
         children
       )}

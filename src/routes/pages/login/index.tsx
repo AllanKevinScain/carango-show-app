@@ -1,22 +1,11 @@
-import { api } from "@/api";
 import { Button, TextField } from "@/components";
-import { useLogin, useSession, type LoginInfertype } from "@/hooks";
+import { useLogin, useSession } from "@/hooks";
 
-import toast from "react-hot-toast";
 import { twMerge } from "tailwind-merge";
 
 export function LoginPage() {
   const { logingMethods } = useLogin();
-  const { login } = useSession();
-
-  async function signIn(values: LoginInfertype) {
-    const res = await api.post("/auth", values);
-    if (res.status !== 200) {
-      return toast.error("Ocorreu um erro");
-    }
-    login(res.data.token);
-    return toast.success("Login efetuado com sucesso!");
-  }
+  const { mutationLogin } = useSession();
 
   return (
     <div className="h-screen w-full grid grid-cols-1 lg:grid-cols-2">
@@ -30,7 +19,9 @@ export function LoginPage() {
       <div className="flex items-center justify-center bg-blue-950 h-full">
         <form
           className={twMerge("p-8 w-full max-w-md", "flex flex-col gap-4")}
-          onSubmit={logingMethods.handleSubmit(signIn)}
+          onSubmit={logingMethods.handleSubmit((data) =>
+            mutationLogin.mutate(data)
+          )}
         >
           <h2 className="text-2xl font-bold mb-6 text-white">Login</h2>
 
@@ -50,6 +41,7 @@ export function LoginPage() {
 
           <Button
             type="submit"
+            isLoading={mutationLogin.isPending}
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             Entrar

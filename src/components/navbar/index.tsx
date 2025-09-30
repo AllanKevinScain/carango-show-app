@@ -5,6 +5,7 @@ import { Container } from "../container";
 import { BiMenu } from "react-icons/bi";
 import { Button } from "../button";
 import { CartButton } from "./cart-button";
+import { useSession } from "@/hooks";
 
 interface NavbarInterface {
   handleDrawer: () => void;
@@ -12,6 +13,7 @@ interface NavbarInterface {
 
 export const Navbar = (props: NavbarInterface) => {
   const { handleDrawer } = props;
+  const { data } = useSession();
 
   return (
     <nav className="bg-blue-950 p-[14px]">
@@ -29,7 +31,7 @@ export const Navbar = (props: NavbarInterface) => {
 
         <div className="flex items-center gap-[14px]">
           <LogoutButton />
-          <CartButton />
+          {data?.role === "customer" && <CartButton />}
         </div>
       </Container>
     </nav>
