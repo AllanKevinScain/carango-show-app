@@ -4,7 +4,14 @@ import type { QueryProviderInterface } from "./query.type";
 
 export const QueryProvider = (props: QueryProviderInterface) => {
   const { children } = props;
-  const [queryClient] = useState(new QueryClient());
+  const [queryClient] = useState(
+    new QueryClient({
+      defaultOptions: {
+        queries: { refetchOnWindowFocus: false, retry: false },
+      },
+    })
+  );
+
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );

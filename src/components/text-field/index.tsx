@@ -1,3 +1,4 @@
+import type { ComponentProps } from "react";
 import {
   Controller,
   type Control,
@@ -7,19 +8,23 @@ import {
 } from "react-hook-form";
 import { twMerge } from "tailwind-merge";
 
+type LabelPropTypes = ComponentProps<"label">["className"];
+
 interface TextFieldInterface<T extends FieldValues> {
   id: Path<T>;
   control: Control<T>;
   type?: string;
   placeholder?: string;
   label?: string;
-  classNameInput?: string;
+  classNameInput?: LabelPropTypes;
+  classNameLabel?: LabelPropTypes;
 }
 
 export const TextField = <T extends FieldValues>(
   props: TextFieldInterface<T>
 ) => {
-  const { label, id, control, classNameInput, ...restProps } = props;
+  const { label, id, control, classNameInput, classNameLabel, ...restProps } =
+    props;
 
   return (
     <Controller
@@ -33,7 +38,13 @@ export const TextField = <T extends FieldValues>(
         return (
           <div className="flex flex-col gap-2 w-full">
             {label && (
-              <label htmlFor={id} className="block text-white font-bold">
+              <label
+                htmlFor={id}
+                className={twMerge(
+                  "block text-white font-bold",
+                  classNameLabel
+                )}
+              >
                 {label}
               </label>
             )}

@@ -24,7 +24,7 @@ export const Modal = (props: ModalInterface) => {
             <h2 className="text-lg font-semibold text-neutral-800">{title}</h2>
             <button
               onClick={handle}
-              className="text-neutral-500 hover:text-neutral-700"
+              className="text-neutral-500 hover:text-neutral-700 cursor-pointer"
             >
               ✖
             </button>

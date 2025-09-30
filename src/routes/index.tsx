@@ -38,7 +38,7 @@ export const CustomRoutes = () => {
           </Route>
 
           <Route element={<LayoutDefault />}>
-            <Route index path="profile" element={<ProfilePage />} />
+            <Route index path="profile/:id" element={<ProfilePage />} />
             <Route path="profile/order" element={<h1>Profile order</h1>} />
           </Route>
         </Routes>

@@ -6,7 +6,7 @@ import { useSession } from "@/hooks";
 
 export const LogoutButton = () => {
   const [activeAnimation, setAnimation] = useState(false);
-  const { logout } = useSession();
+  const { logout, data } = useSession();
 
   return (
     <Button
@@ -20,7 +20,7 @@ export const LogoutButton = () => {
         <span
           className={twMerge(activeAnimation ? "show-text" : "hidden-text")}
         >
-          Deseja sair Allan Kevin Scain?
+          Deseja sair {data?.name.split(" ")[0].toLowerCase()}?
         </span>
       </div>
       <CiLogout size={40} />
