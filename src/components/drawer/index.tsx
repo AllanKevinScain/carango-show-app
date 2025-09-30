@@ -69,7 +69,7 @@ export const Drawer = (props: DrawerInterface) => {
                 />
                 <CustomLink
                   beforeHandle={handle}
-                  to="order"
+                  to="order?page=1&limit=10"
                   Icon={FaBoxes}
                   label="Ver pedidos"
                 />
@@ -93,7 +93,7 @@ export const Drawer = (props: DrawerInterface) => {
                 />
                 <CustomLink
                   beforeHandle={handle}
-                  to="profile/order"
+                  to="/order?page=1&limit=10"
                   Icon={FaBoxes}
                   label="Ver meus pedidos"
                 />
