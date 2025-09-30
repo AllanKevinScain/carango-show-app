@@ -7,6 +7,7 @@ import { ImCart, ImProfile } from "react-icons/im";
 import { GrUserAdmin } from "react-icons/gr";
 import { FaTachometerAlt, FaBoxes } from "react-icons/fa";
 import { CustomLink } from "./link";
+import { useSession } from "@/hooks";
 
 interface DrawerInterface {
   open: boolean;
@@ -16,7 +17,9 @@ interface DrawerInterface {
 export const Drawer = (props: DrawerInterface) => {
   const { open, handle } = props;
 
-  const isAdmin: boolean = true;
+  const { data } = useSession();
+
+  const isAdmin: boolean = data?.role === "admin";
 
   return (
     <div className="relative">
@@ -60,7 +63,7 @@ export const Drawer = (props: DrawerInterface) => {
               <>
                 <CustomLink
                   beforeHandle={handle}
-                  to="admin"
+                  to="/admin?page=1&limit=10"
                   Icon={GrUserAdmin}
                   label="Painel do admin"
                 />
@@ -80,20 +83,21 @@ export const Drawer = (props: DrawerInterface) => {
               label="Meu perfil"
             />
 
-            <CustomLink
-              beforeHandle={handle}
-              to="cart"
-              Icon={ImCart}
-              label="Carrinho"
-            />
-
             {!isAdmin && (
-              <CustomLink
-                beforeHandle={handle}
-                to="profile/order"
-                Icon={FaBoxes}
-                label="Ver meus pedidos"
-              />
+              <>
+                <CustomLink
+                  beforeHandle={handle}
+                  to="cart"
+                  Icon={ImCart}
+                  label="Carrinho"
+                />
+                <CustomLink
+                  beforeHandle={handle}
+                  to="profile/order"
+                  Icon={FaBoxes}
+                  label="Ver meus pedidos"
+                />
+              </>
             )}
           </nav>
         </div>

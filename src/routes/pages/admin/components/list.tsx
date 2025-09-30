@@ -1,6 +1,6 @@
 import { api } from "@/api";
-import { Card, Container } from "@/components";
-import { useProduct, useToggle, type ProducInfertype } from "@/hooks";
+import { Card, Container, Pagination } from "@/components";
+import { useProduct, useToggle, type ListProductReturnType } from "@/hooks";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { FaTruckLoading } from "react-icons/fa";
@@ -9,18 +9,23 @@ import { DeleteModal } from "./delete-modal";
 import { EditModal, type Product } from "./edit-modal";
 import type { AxiosError } from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "react-router";
 
 export const List = () => {
   const { listProducts } = useProduct();
+  const [searchParams, setSearchParams] = useSearchParams();
   const deleteModal = useToggle();
   const editModal = useToggle();
 
   const [productToDelete, setProductToDelete] = useState<string | null>(null);
   const [productToEdit, setProductToEdit] = useState<Product | null>(null);
 
-  const products = useQuery<ProducInfertype[]>({
-    queryKey: ["list-products"],
-    queryFn: listProducts,
+  const page = Number(searchParams.get("page")) || 1;
+  const limit = Number(searchParams.get("limit")) || 10;
+
+  const products = useQuery<ListProductReturnType>({
+    queryKey: ["list-products", page, limit],
+    queryFn: () => listProducts({ page, limit }),
   });
 
   if (products.isLoading) {
@@ -60,7 +65,7 @@ export const List = () => {
 
   return (
     <div className={twMerge("flex flex-col gap-[5px]")}>
-      {products?.data
+      {products.data?.data
         ?.filter((product) => product.id !== undefined)
         .map((product, index) => (
           <Card.table
@@ -81,6 +86,13 @@ export const List = () => {
           onUpdated={() => products.refetch()}
         />
       )}
+
+      <Pagination
+        page={page}
+        limit={limit}
+        totalPages={products?.data?.totalPages || 0}
+        setPage={setSearchParams}
+      />
     </div>
   );
 };
