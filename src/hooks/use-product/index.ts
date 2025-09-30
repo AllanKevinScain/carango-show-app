@@ -14,10 +14,26 @@ export const productSchema = yup.object().shape({
 
 export type ProducInfertype = yup.InferType<typeof productSchema>;
 
+export type ListProductReturnType = {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+  data: ProducInfertype[];
+};
+
+interface ListProductInterface {
+  page?: number;
+  limit?: number;
+}
+
 export function useProduct() {
-  async function listProducts() {
-    const response = await api.get("/product");
-    return response.data;
+  async function listProducts(props?: ListProductInterface) {
+    if (props) {
+      const { page = 1, limit = 50 } = props;
+      const response = await api.get(`/product?page=${page}&limit=${limit}`);
+      return response.data;
+    }
   }
 
   async function getProductById(id: string) {

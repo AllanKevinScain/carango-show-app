@@ -36,6 +36,7 @@ api.interceptors.request.use(
           "⚠️ Token expirado, considerar renovar ou redirecionar login"
         );
         removeCookie(SESSION_TOKEN_NAME);
+        window.location.reload();
       }
     }
 
