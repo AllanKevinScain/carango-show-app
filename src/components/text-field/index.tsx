@@ -18,6 +18,7 @@ interface TextFieldInterface<T extends FieldValues> {
   label?: string;
   classNameInput?: LabelPropTypes;
   classNameLabel?: LabelPropTypes;
+  disabled?: boolean;
 }
 
 export const TextField = <T extends FieldValues>(
@@ -40,8 +41,10 @@ export const TextField = <T extends FieldValues>(
             {label && (
               <label
                 htmlFor={id}
+                aria-disabled={restProps.disabled}
                 className={twMerge(
                   "block text-white font-bold",
+                  restProps.disabled && "cursor-not-allowed opacity-50",
                   classNameLabel
                 )}
               >
@@ -60,6 +63,7 @@ export const TextField = <T extends FieldValues>(
                   : "border-gray-300 focus:ring-blue-500",
                 "border rounded-lg",
                 "placeholder-white",
+                "disabled:cursor-not-allowed disabled:opacity-50",
                 classNameInput
               )}
               {...restProps}

@@ -5,6 +5,7 @@ import { api } from "@/api";
 import toast from "react-hot-toast";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
+import { useEffect } from "react";
 
 const profileSchema = yup.object().shape({
   id: yup.string().required(),
@@ -34,7 +35,6 @@ export function useProfile(id: string) {
 
   const profileMethods = useForm<ProfileInfertype>({
     resolver: yupResolver(profileSchema),
-    defaultValues: profileQuery.data,
   });
 
   async function putProfile(values: ProfileInfertype) {
@@ -48,6 +48,12 @@ export function useProfile(id: string) {
     mutationKey: ["create-profile"],
     mutationFn: putProfile,
   });
+
+  useEffect(() => {
+    if (profileQuery.data) {
+      profileMethods.reset(profileQuery.data);
+    }
+  }, [profileMethods, profileQuery.data]);
 
   return {
     profileMethods,

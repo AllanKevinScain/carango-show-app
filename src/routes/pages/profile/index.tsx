@@ -2,12 +2,13 @@ import { Container, Button, TextField } from "@/components";
 import { twMerge } from "tailwind-merge";
 import { useProfile } from "@/hooks";
 import { FaTruckLoading } from "react-icons/fa";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { FaCarCrash } from "react-icons/fa";
 import colors from "tailwindcss/colors";
 
 export function ProfilePage() {
   const { id } = useParams();
+  const router = useNavigate();
 
   const { profileMethods, mutationProfile, profileQuery } = useProfile(
     id || ""
@@ -57,7 +58,9 @@ export function ProfilePage() {
     >
       <form
         onSubmit={handleSubmit((e) =>
-          mutationProfile.mutate({ ...e, id: id || "" })
+          mutationProfile
+            .mutateAsync({ ...e, id: id || "" })
+            .then(() => router("/product"))
         )}
         className={twMerge(
           "flex flex-col gap-6",
@@ -83,14 +86,28 @@ export function ProfilePage() {
           placeholder="Digite seu email"
           classNameLabel="text-neutral-600 font-medium"
           classNameInput="text-gray-800 placeholder-gray-400 bg-white"
+          disabled={true}
         />
 
         <div className="flex gap-4">
-          <Button type="submit" className="w-fit py-2 px-4">
+          <Button
+            type="submit"
+            className="py-2 px-4"
+            isLoading={mutationProfile.isPending}
+            disabled={!profileMethods.formState.isDirty}
+          >
             Salvar alterações
           </Button>
 
-          <Button type="button" variant="outline" className="w-fit py-2 px-4">
+          <Button
+            type="button"
+            variant="outline"
+            className="py-2 px-4"
+            disabled={
+              mutationProfile.isPending || !profileMethods.formState.isDirty
+            }
+            onClick={() => router("/product")}
+          >
             Cancelar
           </Button>
         </div>
