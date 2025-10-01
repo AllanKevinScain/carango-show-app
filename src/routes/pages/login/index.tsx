@@ -1,5 +1,6 @@
 import { Button, TextField } from "@/components";
 import { useLogin, useSession } from "@/hooks";
+import { Link } from "react-router";
 
 import { twMerge } from "tailwind-merge";
 
@@ -49,9 +50,9 @@ export function LoginPage() {
 
           <p className="text-center text-white">
             Não tem conta?{" "}
-            <a href="/register" className="text-blue-400 hover:underline">
+            <Link to="/register" className="text-blue-400 hover:underline">
               Faça o cadastro
-            </a>
+            </Link>
           </p>
         </form>
       </div>

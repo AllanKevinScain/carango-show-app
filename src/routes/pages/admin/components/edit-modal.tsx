@@ -9,6 +9,7 @@ import type { AxiosError } from "axios";
 import { TextField } from "@/components";
 import { useFieldArray } from "react-hook-form";
 import { useEffect } from "react";
+import { twMerge } from "tailwind-merge";
 
 export interface Product extends CreateProductType {
   id: number;
@@ -69,74 +70,82 @@ export const EditModal = (props: EditModalProps) => {
     <Modal open={open} handle={handle} title="Editar Produto">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 p-4"
+        className={twMerge("flex flex-col gap-4 p-4")}
       >
-        <TextField
-          id="name"
-          control={control}
-          type="text"
-          placeholder="Digite o nome do veiculo"
-          classNameInput="text-gray-800 placeholder-gray-400 bg-white"
-        />
+        <div
+          className={twMerge(
+            "flex flex-col gap-4",
+            "py-4",
+            "overflow-auto max-h-[50vh]"
+          )}
+        >
+          <TextField
+            id="name"
+            control={control}
+            type="text"
+            placeholder="Digite o nome do veiculo"
+            classNameInput="text-gray-800 placeholder-gray-400 bg-white"
+          />
 
-        <TextField
-          id="price"
-          control={control}
-          type="number"
-          placeholder="Preco"
-          classNameInput="text-gray-800 placeholder-gray-400 bg-white"
-        />
+          <TextField
+            id="price"
+            control={control}
+            type="number"
+            placeholder="Preco"
+            classNameInput="text-gray-800 placeholder-gray-400 bg-white"
+          />
 
-        <TextField
-          id="trade"
-          control={control}
-          type="text"
-          placeholder="Digite a marca do veiculo"
-          classNameInput="text-gray-800 placeholder-gray-400 bg-white"
-        />
+          <TextField
+            id="trade"
+            control={control}
+            type="text"
+            placeholder="Digite a marca do veiculo"
+            classNameInput="text-gray-800 placeholder-gray-400 bg-white"
+          />
 
-        <TextField
-          id="model"
-          control={control}
-          type="text"
-          placeholder="Digite o modelo do veiculo"
-          classNameInput="text-gray-800 placeholder-gray-400 bg-white"
-        />
+          <TextField
+            id="model"
+            control={control}
+            type="text"
+            placeholder="Digite o modelo do veiculo"
+            classNameInput="text-gray-800 placeholder-gray-400 bg-white"
+          />
 
-        <TextField
-          id="thumb"
-          control={control}
-          type="text"
-          placeholder="URL da imagem"
-          classNameInput="text-gray-800 placeholder-gray-400 bg-white"
-        />
+          <TextField
+            id="thumb"
+            control={control}
+            type="text"
+            placeholder="URL da imagem"
+            classNameInput="text-gray-800 placeholder-gray-400 bg-white"
+          />
 
-        <TextField
-          id="year"
-          control={control}
-          type="date"
-          placeholder="Ano do veiculo"
-          classNameInput="text-gray-800 placeholder-gray-400 bg-white"
-        />
+          <TextField
+            id="year"
+            control={control}
+            type="date"
+            placeholder="Ano do veiculo"
+            classNameInput="text-gray-800 placeholder-gray-400 bg-white"
+          />
 
-        {fields.map((field, index) => (
-          <div key={field.id} className="flex gap-2 items-center">
-            <TextField
-              id={`specifications.${index}.value`}
-              control={control}
-              type="text"
-              placeholder={`Especificação ${index + 1}`}
-              classNameInput="text-gray-800 placeholder-gray-400 bg-white"
-            />
-            <button
-              type="button"
-              onClick={() => remove(index)}
-              className="px-2 py-1 rounded bg-red-500 text-white hover:bg-red-600"
-            >
-              Remover
-            </button>
-          </div>
-        ))}
+          {fields.map((field, index) => (
+            <div key={field.id} className="flex gap-2 items-center">
+              <TextField
+                id={`specifications.${index}.value`}
+                control={control}
+                type="text"
+                placeholder={`Especificação ${index + 1}`}
+                classNameInput="text-gray-800 placeholder-gray-400 bg-white"
+              />
+              <button
+                type="button"
+                onClick={() => remove(index)}
+                className="px-2 py-1 rounded bg-red-500 text-white hover:bg-red-600"
+              >
+                Remover
+              </button>
+            </div>
+          ))}
+        </div>
 
         <button
           type="button"

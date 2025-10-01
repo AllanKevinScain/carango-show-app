@@ -39,7 +39,10 @@ export const TableCard = (props: CartItemProps) => {
           {onEdit && (
             <Button
               variant="ghost"
-              onClick={onEdit}
+              onClick={(e) => {
+                e.preventDefault();
+                onEdit();
+              }}
               className={twMerge(
                 "text-blue-500 w-fit h-full",
                 "transition",

@@ -17,7 +17,7 @@ interface DrawerInterface {
 export const Drawer = (props: DrawerInterface) => {
   const { open, handle } = props;
 
-  const { data } = useSession();
+  const { data, logout } = useSession();
 
   const isAdmin: boolean = data?.role === "admin";
 
@@ -103,7 +103,7 @@ export const Drawer = (props: DrawerInterface) => {
         </div>
 
         <div className="p-4">
-          <Button>Sair</Button>
+          <Button onClick={logout}>Sair</Button>
         </div>
       </div>
     </div>
