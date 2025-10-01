@@ -78,7 +78,7 @@ export const Drawer = (props: DrawerInterface) => {
 
             <CustomLink
               beforeHandle={handle}
-              to="profile"
+              to={`/profile/${data?.id}`}
               Icon={ImProfile}
               label="Meu perfil"
             />

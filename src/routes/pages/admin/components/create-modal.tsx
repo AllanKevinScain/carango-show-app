@@ -6,7 +6,7 @@ import {
   type CreateProductType,
 } from "@/hooks/use-create-product";
 import type { AxiosError } from "axios";
-import { TextField } from "@/components";
+import { Button, TextField } from "@/components";
 import { useFieldArray } from "react-hook-form";
 
 export const CreateModal = (props: ModalInterface) => {
@@ -54,49 +54,61 @@ export const CreateModal = (props: ModalInterface) => {
       >
         <TextField
           id="name"
+          label="Nome"
           control={control}
           type="text"
           placeholder="Digite o nome do veiculo"
+          classNameLabel="text-neutral-600 font-medium"
           classNameInput="text-gray-800 placeholder-gray-400 bg-white"
         />
 
         <TextField
           id="price"
+          label="Preço"
           control={control}
           type="number"
           placeholder="Preco"
+          classNameLabel="text-neutral-600 font-medium"
           classNameInput="text-gray-800 placeholder-gray-400 bg-white"
         />
 
         <TextField
           id="trade"
+          label="Marca"
           control={control}
           type="text"
           placeholder="Digite a marca do veiculo"
+          classNameLabel="text-neutral-600 font-medium"
           classNameInput="text-gray-800 placeholder-gray-400 bg-white"
         />
 
         <TextField
           id="model"
+          label="Modelo"
           control={control}
           type="text"
           placeholder="Digite o modelo do veiculo"
+          classNameLabel="text-neutral-600 font-medium"
           classNameInput="text-gray-800 placeholder-gray-400 bg-white"
         />
 
         <TextField
           id="thumb"
+          label="Imagem"
           control={control}
           type="text"
           placeholder="URL da imagem"
+          classNameLabel="text-neutral-600 font-medium"
           classNameInput="text-gray-800 placeholder-gray-400 bg-white"
         />
 
         <TextField
           id="year"
+          label="Ano do veículo"
           control={control}
           type="date"
           placeholder="Ano do veiculo"
+          classNameLabel="text-neutral-600 font-medium"
           classNameInput="text-gray-800 placeholder-gray-400 bg-white"
         />
 
@@ -109,38 +121,38 @@ export const CreateModal = (props: ModalInterface) => {
               placeholder={`Especificação ${index + 1}`}
               classNameInput="text-gray-800 placeholder-gray-400 bg-white"
             />
-            <button
-              type="button"
+            <Button
+              variant="ghost"
               onClick={() => remove(index)}
-              className="px-2 py-1 rounded bg-red-500 text-white hover:bg-red-600"
+              className="w-fit px-2 py-2.5 rounded-lg bg-red-500 text-white hover:bg-red-600"
             >
               Remover
-            </button>
+            </Button>
           </div>
         ))}
-        <button
-          type="button"
+        <Button
           onClick={() => append({ value: "" })}
-          className="px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
+          className="px-3 py-1 bg-blue-600 disabled:opacity-50"
         >
           Add Especificação
-        </button>
+        </Button>
 
         <div className="flex justify-end gap-2 pt-4 border-t border-gray-200">
-          <button
-            type="button"
+          <Button
             onClick={handle}
-            className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100"
+            disabled={isSubmitting}
+            variant="outline"
+            className="px-4 py-2"
           >
             Cancelar
-          </button>
-          <button
+          </Button>
+          <Button
             type="submit"
             disabled={isSubmitting}
-            className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
+            className="px-4 py-2 disabled:opacity-50"
           >
-            {isSubmitting ? "Salvando..." : "Salvar"}
-          </button>
+            Salvar
+          </Button>
         </div>
       </form>
     </Modal>
