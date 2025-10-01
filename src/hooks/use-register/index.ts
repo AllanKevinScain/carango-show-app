@@ -37,8 +37,8 @@ export function useRegister() {
     resolver: yupResolver(registerSchema),
     defaultValues: {
       email: "allan@example.com",
-      password: "admin1",
-      confirmPassword: "admin1",
+      password: "123456",
+      confirmPassword: "123456",
       name: "allan kevin scain",
       role: "customer",
     },
