@@ -6,6 +6,7 @@ import {
   RegisterPage,
   AdminPage,
   ProfilePage,
+  NotFoundPage,
 } from "./pages";
 import { LayoutDefault, LayoutLogin } from "./layouts";
 import { CartPage } from "./pages/cart";
@@ -41,7 +42,7 @@ export const CustomRoutes = () => {
             <Route path="profile/order" element={<h1>Profile order</h1>} />
           </Route>
 
-          <Route path="*" element={<h1>Essa página não existe</h1>} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </QueryProvider>
     </SessionProvider>

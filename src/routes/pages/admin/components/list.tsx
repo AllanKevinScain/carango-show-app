@@ -73,7 +73,7 @@ export const List = () => {
             name={product.name}
             price={product.price}
             thumbnail={"/carro_medio.png"}
-            href={`${product.id}`}
+            href={`/product/${product.id}`}
             onRemove={() => confirmDelete(String(product.id))}
             onEdit={() => handleEdit(product as Product)}
           />
