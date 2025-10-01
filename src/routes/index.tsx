@@ -11,6 +11,7 @@ import { LayoutDefault, LayoutLogin } from "./layouts";
 import { CartPage } from "./pages/cart";
 import { QueryProvider, SessionProvider } from "@/providers";
 import { OrderPage } from "./pages/order";
+import { CongratulationsPage } from "./pages/congratulations";
 
 export const CustomRoutes = () => {
   return (
@@ -26,10 +27,7 @@ export const CustomRoutes = () => {
             <Route index path="product" element={<ListPage />} />
             <Route path="product/:productId" element={<ProductPage />} />
             <Route path="cart" element={<CartPage />} />
-            <Route
-              path="congratulations"
-              element={<h1>Parabéns voce finalizou o pedido!</h1>}
-            />
+            <Route path="congratulations" element={<CongratulationsPage />} />
           </Route>
 
           <Route element={<LayoutDefault />}>
