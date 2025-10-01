@@ -74,7 +74,12 @@ export const DefaultCard = (props: DefaultCardProps) => {
                 showR$: true,
               })}
             </span>
-            <span className="text-[14px] font-bold text-gray-400 underline">
+            <span
+              className={twMerge(
+                "text-[14px] font-bold text-gray-400 underline",
+                "text-nowrap"
+              )}
+            >
               {trade}, {carYear.toLocaleDateString("pt-BR")}
             </span>
           </div>
