@@ -8,6 +8,7 @@ import {
 import type { AxiosError } from "axios";
 import { Button, TextField } from "@/components";
 import { useFieldArray } from "react-hook-form";
+import { twMerge } from "tailwind-merge";
 
 export const CreateModal = (props: ModalInterface) => {
   const { open, handle } = props;
@@ -52,84 +53,93 @@ export const CreateModal = (props: ModalInterface) => {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-4 p-4"
       >
-        <TextField
-          id="name"
-          label="Nome"
-          control={control}
-          type="text"
-          placeholder="Digite o nome do veiculo"
-          classNameLabel="text-neutral-600 font-medium"
-          classNameInput="text-gray-800 placeholder-gray-400 bg-white"
-        />
+        <div
+          className={twMerge(
+            "flex flex-col gap-4",
+            "py-4 px-[4px]",
+            "overflow-auto max-h-[50vh]"
+          )}
+        >
+          <TextField
+            id="name"
+            label="Nome"
+            control={control}
+            type="text"
+            placeholder="Digite o nome do veiculo"
+            classNameLabel="text-neutral-600 font-medium"
+            classNameInput="text-gray-800 placeholder-gray-400 bg-white"
+          />
 
-        <TextField
-          id="price"
-          label="Preço"
-          control={control}
-          type="number"
-          placeholder="Preco"
-          classNameLabel="text-neutral-600 font-medium"
-          classNameInput="text-gray-800 placeholder-gray-400 bg-white"
-        />
+          <TextField
+            id="price"
+            label="Preço"
+            control={control}
+            type="number"
+            placeholder="Preco"
+            classNameLabel="text-neutral-600 font-medium"
+            classNameInput="text-gray-800 placeholder-gray-400 bg-white"
+          />
 
-        <TextField
-          id="trade"
-          label="Marca"
-          control={control}
-          type="text"
-          placeholder="Digite a marca do veiculo"
-          classNameLabel="text-neutral-600 font-medium"
-          classNameInput="text-gray-800 placeholder-gray-400 bg-white"
-        />
+          <TextField
+            id="trade"
+            label="Marca"
+            control={control}
+            type="text"
+            placeholder="Digite a marca do veiculo"
+            classNameLabel="text-neutral-600 font-medium"
+            classNameInput="text-gray-800 placeholder-gray-400 bg-white"
+          />
 
-        <TextField
-          id="model"
-          label="Modelo"
-          control={control}
-          type="text"
-          placeholder="Digite o modelo do veiculo"
-          classNameLabel="text-neutral-600 font-medium"
-          classNameInput="text-gray-800 placeholder-gray-400 bg-white"
-        />
+          <TextField
+            id="model"
+            label="Modelo"
+            control={control}
+            type="text"
+            placeholder="Digite o modelo do veiculo"
+            classNameLabel="text-neutral-600 font-medium"
+            classNameInput="text-gray-800 placeholder-gray-400 bg-white"
+          />
 
-        <TextField
-          id="thumb"
-          label="Imagem"
-          control={control}
-          type="text"
-          placeholder="URL da imagem"
-          classNameLabel="text-neutral-600 font-medium"
-          classNameInput="text-gray-800 placeholder-gray-400 bg-white"
-        />
+          <TextField
+            id="thumb"
+            label="Imagem"
+            control={control}
+            type="text"
+            placeholder="URL da imagem"
+            classNameLabel="text-neutral-600 font-medium"
+            classNameInput="text-gray-800 placeholder-gray-400 bg-white"
+          />
 
-        <TextField
-          id="year"
-          label="Ano do veículo"
-          control={control}
-          type="date"
-          placeholder="Ano do veiculo"
-          classNameLabel="text-neutral-600 font-medium"
-          classNameInput="text-gray-800 placeholder-gray-400 bg-white"
-        />
+          <TextField
+            id="year"
+            label="Ano do veículo"
+            control={control}
+            type="date"
+            placeholder="Ano do veiculo"
+            classNameLabel="text-neutral-600 font-medium"
+            classNameInput="text-gray-800 placeholder-gray-400 bg-white"
+          />
 
-        {fields.map((field, index) => (
-          <div key={field.id} className="flex gap-2 items-center">
-            <TextField
-              id={`specifications.${index}.value`}
-              control={control}
-              type="text"
-              placeholder={`Especificação ${index + 1}`}
-              classNameInput="text-gray-800 placeholder-gray-400 bg-white"
-            />
-            <Button
-              variant="ghost"
-              onClick={() => remove(index)}
-              className="w-fit px-2 py-2.5 rounded-lg bg-red-500 text-white hover:bg-red-600"
-            >
-              Remover
-            </Button>
-          </div>
-        ))}
+          {fields.map((field, index) => (
+            <div key={field.id} className="flex gap-2 items-center">
+              <TextField
+                id={`specifications.${index}.value`}
+                control={control}
+                type="text"
+                placeholder={`Especificação ${index + 1}`}
+                classNameInput="text-gray-800 placeholder-gray-400 bg-white"
+              />
+              <Button
+                variant="ghost"
+                onClick={() => remove(index)}
+                className="w-fit px-2 py-2.5 rounded-lg bg-red-500 text-white hover:bg-red-600"
+              >
+                Remover
+              </Button>
+            </div>
+          ))}
+        </div>
+
         <Button
           onClick={() => append({ value: "" })}
           className="px-3 py-1 bg-blue-600 disabled:opacity-50"
