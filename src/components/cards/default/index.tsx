@@ -41,11 +41,15 @@ export const DefaultCard = (props: DefaultCardProps) => {
       >
         <h5 className="text-[20px] font-bold text-blue-950">{name}</h5>
         <span className="text-[14px] font-bold text-gray-400">{model}</span>
-        <img
-          src={thumb}
-          alt={name}
-          className={twMerge("max-h-[200px]", "object-contain")}
-        />
+        <div
+          className={twMerge("flex items-center justify-center", "h-[200px]")}
+        >
+          <img
+            src={thumb}
+            alt={name}
+            className={twMerge("max-h-[200px]", "object-contain")}
+          />
+        </div>
 
         <div className="flex justify-between overflow-hidden">
           <div className="flex items-center gap-[4px]">
@@ -83,7 +87,7 @@ export const DefaultCard = (props: DefaultCardProps) => {
               {trade}, {carYear.toLocaleDateString("pt-BR")}
             </span>
           </div>
-          <Button className="h-full">Comprar agora</Button>
+          <Button className="h-full text-nowrap">Comprar agora</Button>
         </div>
       </div>
     </Link>
