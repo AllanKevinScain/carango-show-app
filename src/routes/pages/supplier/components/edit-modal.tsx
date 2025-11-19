@@ -1,0 +1,118 @@
+import { toast } from "react-hot-toast";
+import { api } from "@/api";
+import {
+  useCreateSupplier,
+  type CreateSupplierType,
+} from "@/hooks/use-create-supplier";
+import type { AxiosError } from "axios";
+import { Button, TextField } from "@/components";
+import { useEffect } from "react";
+import { twMerge } from "tailwind-merge";
+import { Modal, type ModalInterface } from "../../admin/components/modal";
+
+export interface Supplier extends CreateSupplierType {
+  id: number;
+}
+
+interface EditModalProps extends ModalInterface {
+  supplier: Supplier;
+  onUpdated?: () => void;
+}
+
+export const EditModal = (props: EditModalProps) => {
+  const { open, handle, supplier, onUpdated } = props;
+
+  const { createSupplierMethods } = useCreateSupplier();
+
+  const {
+    handleSubmit,
+    control,
+    formState: { isSubmitting },
+    reset,
+  } = createSupplierMethods;
+
+  useEffect(() => {
+    reset({
+      name: supplier.name,
+      email: supplier.email,
+      phone: supplier.phone,
+    });
+  }, [supplier, reset]);
+
+  const onSubmit = async (data: CreateSupplierType) => {
+    try {
+      const res = await api.put(`/supplier/${supplier.id}`, data);
+
+      if (res.status === 200) {
+        handle();
+        onUpdated?.();
+        toast.success("Fornecedor atualizado com sucesso!");
+      } else {
+        toast.error("Erro desconhecido");
+      }
+    } catch (error) {
+      const aux = error as AxiosError<{ message: string }>;
+      toast.error(aux?.response?.data?.message || "Erro desconhecido");
+    }
+  };
+
+  return (
+    <Modal open={open} handle={handle} title="Editar Fornecedor">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className={twMerge("flex flex-col gap-4 p-4")}
+      >
+        <div
+          className={twMerge(
+            "flex flex-col gap-4",
+            "py-4 px-[4px]",
+            "overflow-auto max-h-[50vh]"
+          )}
+        >
+          <TextField
+            id="name"
+            control={control}
+            type="text"
+            placeholder="Digite o nome do fornecedor"
+            classNameInput="text-gray-800 placeholder-gray-400 bg-white"
+          />
+
+          <TextField
+            id="email"
+            control={control}
+            type="email"
+            placeholder="email@fornecedor.com"
+            classNameInput="text-gray-800 placeholder-gray-400 bg-white"
+          />
+
+          <TextField
+            id="phone"
+            control={control}
+            type="text"
+            placeholder="(11) 99999-9999"
+            classNameInput="text-gray-800 placeholder-gray-400 bg-white"
+          />
+        </div>
+
+        <div className="flex justify-end gap-2 pt-4 border-t border-gray-200">
+          <Button
+            onClick={handle}
+            disabled={isSubmitting}
+            variant="outline"
+            className="px-4 py-2"
+          >
+            Cancelar
+          </Button>
+
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="px-4 py-2 disabled:opacity-50"
+          >
+            Salvar
+          </Button>
+        </div>
+      </form>
+    </Modal>
+  );
+};

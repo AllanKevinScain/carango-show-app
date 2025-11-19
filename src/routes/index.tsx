@@ -14,6 +14,7 @@ import { QueryProvider, SessionProvider } from "@/providers";
 import { OrderPage } from "./pages/order";
 import { CongratulationsPage } from "./pages/congratulations";
 import { ErrorBoundary } from "./pages/error";
+import { SupplierPage } from "./pages/supplier";
 
 export const CustomRoutes = () => {
   return (
@@ -35,6 +36,7 @@ export const CustomRoutes = () => {
           <Route element={<LayoutDefault />} ErrorBoundary={ErrorBoundary}>
             <Route index path="admin" element={<AdminPage />} />
             <Route path="order" element={<OrderPage />} />
+            <Route index path="supplier" element={<SupplierPage />} />
           </Route>
 
           <Route element={<LayoutDefault />} ErrorBoundary={ErrorBoundary}>

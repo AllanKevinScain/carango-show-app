@@ -5,7 +5,7 @@ import colors from "tailwindcss/colors";
 import { Button } from "../button";
 import { ImCart, ImProfile } from "react-icons/im";
 import { GrUserAdmin } from "react-icons/gr";
-import { FaTachometerAlt, FaBoxes } from "react-icons/fa";
+import { FaTachometerAlt, FaBoxes, FaBoxOpen } from "react-icons/fa";
 import { CustomLink } from "./link";
 import { useSession } from "@/hooks";
 
@@ -72,6 +72,12 @@ export const Drawer = (props: DrawerInterface) => {
                   to="order?page=1&limit=10"
                   Icon={FaBoxes}
                   label="Ver pedidos"
+                />
+                <CustomLink
+                  beforeHandle={handle}
+                  to="supplier?page=1&limit=10"
+                  Icon={FaBoxOpen}
+                  label="Ver fornecedores"
                 />
               </>
             )}
