@@ -10,6 +10,7 @@ export const productSchema = yup.object().shape({
   price: yup.number().required("Campo obrigatório"),
   specifications: yup.array().of(yup.string().required("Campo obrigatório")),
   thumb: yup.string(),
+  supplierId: yup.number().required(),
 });
 
 export type ProducInfertype = yup.InferType<typeof productSchema>;

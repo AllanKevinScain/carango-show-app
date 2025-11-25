@@ -24,6 +24,7 @@ export const createProductSchema = yup.object().shape({
     .url("A URL da imagem deve ser valida")
     .required("A imagem é obrigatoria"),
   year: yup.string().required("O ano é obrigatorio"),
+  supplierId: yup.number().required(),
 });
 
 export type CreateProductType = yup.InferType<typeof createProductSchema>;
@@ -39,6 +40,7 @@ export function useCreateProduct() {
       specifications: [],
       thumb: "",
       year: "",
+      supplierId: undefined,
     },
   });
 

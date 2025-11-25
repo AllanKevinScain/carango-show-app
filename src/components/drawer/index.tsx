@@ -5,9 +5,15 @@ import colors from "tailwindcss/colors";
 import { Button } from "../button";
 import { ImCart, ImProfile } from "react-icons/im";
 import { GrUserAdmin } from "react-icons/gr";
-import { FaTachometerAlt, FaBoxes, FaBoxOpen } from "react-icons/fa";
+import {
+  FaTachometerAlt,
+  FaBoxes,
+  FaBoxOpen,
+  FaChartLine,
+} from "react-icons/fa";
 import { CustomLink } from "./link";
 import { useSession } from "@/hooks";
+import { MdBarChart, MdMonetizationOn } from "react-icons/md";
 
 interface DrawerInterface {
   open: boolean;
@@ -78,6 +84,24 @@ export const Drawer = (props: DrawerInterface) => {
                   to="supplier?page=1&limit=10"
                   Icon={FaBoxOpen}
                   label="Ver fornecedores"
+                />
+                <CustomLink
+                  beforeHandle={handle}
+                  to="dashboard"
+                  Icon={MdBarChart}
+                  label="Dashboard"
+                />
+                <CustomLink
+                  beforeHandle={handle}
+                  to="relatorio/vendas"
+                  Icon={FaChartLine}
+                  label="Relatório de vendas"
+                />
+                <CustomLink
+                  beforeHandle={handle}
+                  to="relatorio/financeiro"
+                  Icon={MdMonetizationOn}
+                  label="Relatório Financeiro"
                 />
               </>
             )}

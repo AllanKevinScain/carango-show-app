@@ -6,9 +6,11 @@ import {
   type CreateProductType,
 } from "@/hooks/use-create-product";
 import type { AxiosError } from "axios";
-import { Button, TextField } from "@/components";
+import { Button, Select, TextField } from "@/components";
 import { useFieldArray } from "react-hook-form";
 import { twMerge } from "tailwind-merge";
+import { useSupplier, type SupplierInfoType } from "@/hooks/use-supplier";
+import { useEffect, useState } from "react";
 
 export const CreateModal = (props: ModalInterface) => {
   const { open, handle } = props;
@@ -19,6 +21,20 @@ export const CreateModal = (props: ModalInterface) => {
     formState: { isSubmitting },
     reset,
   } = createProductMethods;
+
+  const { listSuppliers } = useSupplier();
+  const [suppliers, setSuppliers] = useState<SupplierInfoType[]>([]);
+
+  useEffect(() => {
+    listSuppliers({ page: 1, limit: 100 }).then((res) => {
+      setSuppliers(res.data);
+    });
+  }, []);
+
+  const supplierOptions = suppliers.map((s) => ({
+    label: s.name,
+    value: s.id,
+  }));
 
   const { fields, append, remove } = useFieldArray<
     CreateProductType,
@@ -34,6 +50,7 @@ export const CreateModal = (props: ModalInterface) => {
         ...data,
         specifications: data.specifications.map((s) => s.value),
       };
+
       const res = await api.post("/product", payload);
       if (res.status === 201) {
         handle();
@@ -72,7 +89,7 @@ export const CreateModal = (props: ModalInterface) => {
 
           <TextField
             id="price"
-            label="Preço"
+            label="Preco"
             control={control}
             type="number"
             placeholder="Preco"
@@ -112,12 +129,22 @@ export const CreateModal = (props: ModalInterface) => {
 
           <TextField
             id="year"
-            label="Ano do veículo"
+            label="Ano do veiculo"
             control={control}
             type="date"
             placeholder="Ano do veiculo"
             classNameLabel="text-neutral-600 font-medium"
             classNameInput="text-gray-800 placeholder-gray-400 bg-white"
+          />
+
+          <Select
+            id="supplierId"
+            label="Fornecedor"
+            control={control}
+            options={supplierOptions}
+            placeholder="Selecione um fornecedor"
+            classNameLabel="text-neutral-600 font-medium"
+            classNameSelect="text-gray-800 bg-white"
           />
 
           {fields.map((field, index) => (
@@ -126,7 +153,7 @@ export const CreateModal = (props: ModalInterface) => {
                 id={`specifications.${index}.value`}
                 control={control}
                 type="text"
-                placeholder={`Especificação ${index + 1}`}
+                placeholder={`Especificacao ${index + 1}`}
                 classNameInput="text-gray-800 placeholder-gray-400 bg-white"
               />
               <Button

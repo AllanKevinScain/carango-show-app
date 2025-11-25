@@ -6,10 +6,11 @@ import {
   type CreateProductType,
 } from "@/hooks/use-create-product";
 import type { AxiosError } from "axios";
-import { Button, TextField } from "@/components";
+import { Button, Select, TextField } from "@/components";
 import { useFieldArray } from "react-hook-form";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
+import { useSupplier, type SupplierInfoType } from "@/hooks/use-supplier";
 
 export interface Product extends CreateProductType {
   id: number;
@@ -37,6 +38,20 @@ export const EditModal = (props: EditModalProps) => {
       ),
     });
   }, [product, reset]);
+
+  const { listSuppliers } = useSupplier();
+  const [suppliers, setSuppliers] = useState<SupplierInfoType[]>([]);
+
+  useEffect(() => {
+    listSuppliers({ page: 1, limit: 100 }).then((res) => {
+      setSuppliers(res.data);
+    });
+  }, []);
+
+  const supplierOptions = suppliers.map((s) => ({
+    label: s.name,
+    value: s.id,
+  }));
 
   const { fields, append, remove } = useFieldArray<
     CreateProductType,
@@ -125,6 +140,16 @@ export const EditModal = (props: EditModalProps) => {
             type="date"
             placeholder="Ano do veiculo"
             classNameInput="text-gray-800 placeholder-gray-400 bg-white"
+          />
+
+          <Select
+            id="supplierId"
+            label="Fornecedor"
+            control={control}
+            options={supplierOptions}
+            placeholder="Selecione um fornecedor"
+            classNameLabel="text-neutral-600 font-medium"
+            classNameSelect="text-gray-800 bg-white"
           />
 
           {fields.map((field, index) => (

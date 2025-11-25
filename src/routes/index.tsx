@@ -15,6 +15,9 @@ import { OrderPage } from "./pages/order";
 import { CongratulationsPage } from "./pages/congratulations";
 import { ErrorBoundary } from "./pages/error";
 import { SupplierPage } from "./pages/supplier";
+import { DashboardPage } from "./pages/dashboard";
+import SalesReportPage from "./pages/sales-report";
+import FinancialReportPage from "./pages/financial-report";
 
 export const CustomRoutes = () => {
   return (
@@ -37,6 +40,17 @@ export const CustomRoutes = () => {
             <Route index path="admin" element={<AdminPage />} />
             <Route path="order" element={<OrderPage />} />
             <Route index path="supplier" element={<SupplierPage />} />
+            <Route index path="dashboard" element={<DashboardPage />} />
+            <Route
+              index
+              path="relatorio/vendas"
+              element={<SalesReportPage />}
+            />
+            <Route
+              index
+              path="relatorio/financeiro"
+              element={<FinancialReportPage />}
+            />
           </Route>
 
           <Route element={<LayoutDefault />} ErrorBoundary={ErrorBoundary}>
