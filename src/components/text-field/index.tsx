@@ -19,13 +19,21 @@ interface TextFieldInterface<T extends FieldValues> {
   classNameInput?: LabelPropTypes;
   classNameLabel?: LabelPropTypes;
   disabled?: boolean;
+  mask?: (_value: string) => string;
 }
 
 export const TextField = <T extends FieldValues>(
   props: TextFieldInterface<T>
 ) => {
-  const { label, id, control, classNameInput, classNameLabel, ...restProps } =
-    props;
+  const {
+    label,
+    id,
+    control,
+    classNameInput,
+    classNameLabel,
+    mask,
+    ...restProps
+  } = props;
 
   return (
     <Controller
@@ -53,6 +61,14 @@ export const TextField = <T extends FieldValues>(
             )}
             <input
               {...field}
+              onChange={(e) => {
+                if (mask) {
+                  const masked = mask(e.target.value);
+                  field.onChange(masked);
+                } else {
+                  field.onChange(e);
+                }
+              }}
               id={id}
               className={twMerge(
                 "w-full px-3 py-2",

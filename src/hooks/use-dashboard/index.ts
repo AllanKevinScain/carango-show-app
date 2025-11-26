@@ -1,5 +1,19 @@
 import { api } from "@/api";
 
+export interface SupplierRankingItem {
+  supplierId: number;
+  supplierName: string;
+  supplierEmail: string;
+  totalProductsSold: number;
+  totalAmount: number;
+  averageOrderValue: number;
+}
+
+export interface SupplierRankingResponse {
+  period: string;
+  suppliers: SupplierRankingItem[];
+}
+
 export interface SummaryResponse {
   totalMonthAmount: number;
   orderCount: number;
@@ -25,8 +39,14 @@ export function useDashboard() {
     return response.data as TopProductResponse;
   }
 
+  async function getSupplierRanking() {
+    const response = await api.get(`/report/suppliers-ranking`);
+    return response.data as SupplierRankingResponse;
+  }
+
   return {
     getSummary,
     getTopProduct,
+    getSupplierRanking,
   };
 }
