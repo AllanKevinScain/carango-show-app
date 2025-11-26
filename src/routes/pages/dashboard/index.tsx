@@ -5,9 +5,10 @@ import { FaTruckLoading } from "react-icons/fa";
 import { MdAttachMoney, MdBarChart, MdStar } from "react-icons/md";
 import { twMerge } from "tailwind-merge";
 import { DashboardCard } from "./components/card";
+import { SupplierRanking } from "./components/supplierRanking";
 
 export function DashboardPage() {
-  const { getSummary, getTopProduct } = useDashboard();
+  const { getSummary, getTopProduct, getSupplierRanking } = useDashboard();
 
   const summaryQuery = useQuery({
     queryKey: ["dashboard-summary"],
@@ -17,6 +18,11 @@ export function DashboardPage() {
   const topProductQuery = useQuery({
     queryKey: ["dashboard-top-product"],
     queryFn: getTopProduct,
+  });
+
+  const rankingQuery = useQuery({
+    queryKey: ["supplier-ranking"],
+    queryFn: getSupplierRanking,
   });
 
   const isLoading =
@@ -64,6 +70,13 @@ export function DashboardPage() {
           description={topProductQuery.data?.productName ?? "Nenhum"}
           icon={<MdStar size={32} />}
         />
+
+        {rankingQuery.data && (
+          <SupplierRanking
+            period={rankingQuery.data.period}
+            suppliers={rankingQuery.data.suppliers}
+          />
+        )}
       </div>
     </Container>
   );

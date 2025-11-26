@@ -19,6 +19,23 @@ export const CreateModal = (props: ModalInterface) => {
     reset,
   } = createSupplierMethods;
 
+  const formatPhone = (value: string) => {
+    const digits = value.replace(/\D/g, "");
+
+    if (digits.length <= 2) {
+      return `(${digits}`;
+    }
+
+    if (digits.length <= 7) {
+      return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+    }
+
+    return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(
+      7,
+      11
+    )}`;
+  };
+
   const onSubmit = async (data: CreateSupplierType) => {
     try {
       const res = await api.post("/supplier", data);
@@ -68,9 +85,10 @@ export const CreateModal = (props: ModalInterface) => {
             label="Telefone"
             control={control}
             type="text"
-            placeholder="(11) 99999-9999"
+            placeholder="(11) 98765-4321"
             classNameLabel="text-neutral-600 font-medium"
             classNameInput="text-gray-800 placeholder-gray-400 bg-white"
+            mask={formatPhone}
           />
         </div>
 
