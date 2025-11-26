@@ -29,6 +29,7 @@ export const CreateModal = (props: ModalInterface) => {
     listSuppliers({ page: 1, limit: 100 }).then((res) => {
       setSuppliers(res.data);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const supplierOptions = suppliers.map((s) => ({
